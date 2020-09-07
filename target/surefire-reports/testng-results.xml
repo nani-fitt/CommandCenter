@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="commandCenter" duration-ms="62575" started-at="2020-09-07T14:46:18 UYT" finished-at="2020-09-07T14:47:20 UYT">
+    <groups>
+    </groups>
+    <test name="Test on chrome" duration-ms="62575" started-at="2020-09-07T14:46:18 UYT" finished-at="2020-09-07T14:47:20 UYT">
+      <class name="TestRunner.Runner">
+        <test-method status="PASS" signature="setUpClass()[pri:0, instance:TestRunner.Runner@4f063c0a]" name="setUpClass" is-config="true" duration-ms="344" started-at="2020-09-07T14:46:18 UYT" finished-at="2020-09-07T14:46:18 UYT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method status="PASS" signature="scenario(io.cucumber.testng.PickleEventWrapper, io.cucumber.testng.CucumberFeatureWrapper)[pri:0, instance:TestRunner.Runner@4f063c0a]" name="scenario" duration-ms="61850" started-at="2020-09-07T14:46:18 UYT" data-provider="feature" finished-at="2020-09-07T14:47:20 UYT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Search by Claims correct data"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["verify Elastic Search functionality"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- scenario -->
+        <test-method status="PASS" signature="tearDownClass()[pri:0, instance:TestRunner.Runner@4f063c0a]" name="tearDownClass" is-config="true" duration-ms="183" started-at="2020-09-07T14:47:20 UYT" finished-at="2020-09-07T14:47:20 UYT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- TestRunner.Runner -->
+    </test> <!-- Test on chrome -->
+  </suite> <!-- commandCenter -->
+</testng-results>

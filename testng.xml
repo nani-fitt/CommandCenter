@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="commandCenter">
+	<test name="Test on chrome">
+	<!--	<parameter name="BrowserType" value="Chrome"/>-->
+		<classes>
+			<class name="TestRunner.Runner" />
+		</classes>
+	</test> <!-- Test -->
+
+	<!--<test name="Test on safari">
+		<parameter name="BrowserType" value="Safari"/>
+		<classes>
+			<class name="TestRunner.Runner" />
+		</classes>
+	</test>  Test -->
+	
+</suite> <!-- Suite -->

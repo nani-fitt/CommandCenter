@@ -1,0 +1,141 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": []
+      },
+      {
+        "start_timestamp": "2020-09-07T17:46:18.862Z",
+        "before": [
+          {
+            "result": {
+              "duration": 6869805710,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ServicesHook.initializeTest()"
+            }
+          }
+        ],
+        "line": 26,
+        "name": "Search by Claims correct data",
+        "description": "",
+        "id": "verify-elastic-search-functionality;search-by-claims-correct-data;;2",
+        "after": [
+          {
+            "result": {
+              "duration": 139535035,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ServicesHook.endTest(Scenario)"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 27292552071,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "user Sign In with correct credentials \"email\" and \"password\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"email\"",
+                  "offset": 38
+                },
+                {
+                  "val": "\"password\"",
+                  "offset": 50
+                }
+              ],
+              "location": "DetailsPolicy.userSignInWithCorrectCredentialsAnd(String,String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 9292014072,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "enter the criteria desired \"policyclaims\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"policyclaims\"",
+                  "offset": 27
+                }
+              ],
+              "location": "DetailsPolicy.enterTheNumberOfPolicyDesired(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 12881316844,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "select claims checkbook",
+            "match": {
+              "location": "ElasticSearchSteps.selectClaimsCheckbook()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 5062792196,
+              "status": "passed"
+            },
+            "line": 22,
+            "name": "verify the claims displayed is correct \"policyclaims\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"policyclaims\"",
+                  "offset": 39
+                }
+              ],
+              "location": "ElasticSearchSteps.verifyTheClaimsDisplayedIsCorrect(String)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@ElasticSearch"
+          },
+          {
+            "name": "@ElasticSearchClaims"
+          }
+        ]
+      }
+    ],
+    "name": "verify Elastic Search functionality",
+    "description": "",
+    "id": "verify-elastic-search-functionality",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/ElasticSearch.feature",
+    "tags": [
+      {
+        "name": "@ElasticSearch",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]
