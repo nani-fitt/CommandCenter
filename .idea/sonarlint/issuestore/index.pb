@@ -32,5 +32,13 @@ f
 6src/test/java/StepsDefinitions/ElasticSearchSteps.java,0/c/0c5d5a70b5b7f01b220004b9466af22109681972
 P
  src/test/java/Utilities/Log.java,b/c/bcf80aefacbf42e159b0dd979a3f4c023e15b3c5
-R
-"src/main/java/resources/log4j2.xml,3/3/336f74aeb9f8ee1579fb5cd098a17981af39dadc
+a
+1src/test/resources/features/PolicyDeatils.feature,6/9/69adf3151cf06b5e3ee39f84563c56c9f58b6b01
+Z
+*src/test/resources/features/SignIn.feature,1/6/16c1ee486f61e8d17a07533972a3c25f1bad922a
+T
+$src/test/resources/extent-config.xml,5/e/5e844a4ae4d0c9be765f52062a1fa846fac8a39d
+Y
+)src/main/java/resources/log4j2.properties,2/b/2bacaf43fbebcafb9cde3e051617052bb88d3b02
+F
+Logs/commandCenter.log,b/8/b80bcba98a34f661e77c39d7bb8279055e73651a
