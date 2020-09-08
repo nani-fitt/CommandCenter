@@ -146,7 +146,7 @@ public class DetailsPolicy extends TestBase {
     @Then("verify the information error message")
     public void verifyTheInformationErrorMessage() {
        Log.info("Verify the error message");
-
+        validateWindows();
     }
 
     @And("verify Pending Change status is displayed")
@@ -160,7 +160,7 @@ public class DetailsPolicy extends TestBase {
     @And("select Add insurance button")
     public void selectAddInsuranceButton() throws InterruptedException {
         Log.info("Click on Add insurance information");
-        deta.buttonSaveInsuranceInfo();
+        deta.addInsuranceInfo();
     }
 
     @Then("verify the secondary Insurance is displayed")
@@ -173,7 +173,7 @@ public class DetailsPolicy extends TestBase {
     }
 
     @Then("enter the information desired {string} {string} {string} {string} {string} {string} {string}{string}{string} {string} {string}")
-    public void enterTheInformationDesired(String firstName, String lastName, String phoneNumber, String dateBirth, String city, String state, String county, String postal, String email, String maritalStatus, String address) throws IOException, InterruptedException {
+    public void enterTheInformationDesired(String firstName, String lastName, String phoneNumber, String dateBirth, String city, String postal, String state, String county, String email, String maritalStatus, String address) throws IOException, InterruptedException {
         Log.info("Enter the data desired Add insurance");
         p= PropertyHelper.loadData();
         Random randomGenerator= new Random(System.currentTimeMillis());
@@ -183,10 +183,10 @@ public class DetailsPolicy extends TestBase {
         String numberP= p.getProperty(phoneNumber)+randomInt;
         String birth= p.getProperty(dateBirth);
         String cit= p.getProperty(city);
+        String codePostal= p.getProperty(postal);
         String stateS= p.getProperty(state);
         String coun= p.getProperty(county);
-        String codePostal= p.getProperty(postal);
-        String randomEmail=p.getProperty(email)+randomInt+"@mailinator.com";
+        String randomEmail=p.getProperty(email);
         String maritalStat= p.getProperty(maritalStatus);
         String sddres= p.getProperty(address);
 
@@ -211,5 +211,11 @@ public class DetailsPolicy extends TestBase {
     @And("verify Approved status is displayed")
     public void verifyApprovedStatusIsDisplayed() {
 
+    }
+
+    @And("select first policy displayed")
+    public void selectFirstPolicyDisplayed() throws InterruptedException {
+        Log.info("Select first policy displayed");
+        deta.policyFirstOption();
     }
 }

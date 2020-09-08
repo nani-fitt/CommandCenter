@@ -55,7 +55,7 @@ public class DetailsPolicyPage {
     @FindBy(id= "firstName")
     WebElement firstName;
 
-    @FindBy(id= "lastName")
+    @FindBy(css= "input[id='lastName']")
     WebElement lastName;
 
     @FindBy(id= "phoneNumber")
@@ -99,6 +99,9 @@ public class DetailsPolicyPage {
 
     @FindBy(css= "div[class='MuiGrid-root MuiGrid-item'] button")
     List<WebElement> approvedAndReject;
+
+    @FindBy(xpath= "//*[contains(text(),'Add insured')]")
+    WebElement addInsurance;
 
 
 
@@ -183,6 +186,12 @@ public class DetailsPolicyPage {
         wait.until(ExpectedConditions.elementToBeClickable(editSelect.get(3))).click();
     }
 
+    public void addInsuranceInfo() throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act= new Actions(driver);
+        act.moveToElement(addInsurance).doubleClick(addInsurance).build().perform();
+    }
+
     public void buttonSaveInsuranceInfo() throws InterruptedException {
         Thread.sleep(5000);
         WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(80));
@@ -246,7 +255,6 @@ public class DetailsPolicyPage {
         Thread.sleep(5000);
        if(insuranceInfo.size() > 1)
        {
-           Assert.assertEquals(insuranceInfo.get(6).getText(),mail);
            Assert.assertEquals(insuranceInfo.get(10).getText(),status);
            Assert.assertEquals(insuranceInfo.get(12).getText(),addrs);
        }
@@ -290,32 +298,49 @@ public class DetailsPolicyPage {
 
     public void enterInsuranceData(String name, String lastnam, String phoneN, String date, String city, String postal, String state, String county,
                                    String emai, String marital, String addres) throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(5000);
+        Actions act= new Actions(driver);
+        act.click(firstName).build().perform();
         firstName.sendKeys(name);
         Thread.sleep(2000);
+
+        act.click(lastName).build().perform();
         lastName.sendKeys(lastnam);
         Thread.sleep(2000);
+
+        act.click(phoneNumber).build().perform();
         phoneNumber.sendKeys(phoneN);
         Thread.sleep(2000);
+
+        act.click(birthday).build().perform();
         birthday.sendKeys(date);
         Thread.sleep(2000);
+
+        act.click(email).build().perform();
+        email.sendKeys(emai);
+        Thread.sleep(2000);
+
+        dropdownOptions.get(2).click();
+        selectMaritalStatus(marital);
+        Thread.sleep(2000);
+
+        addressOne.sendKeys(addres);
+        Thread.sleep(2000);
+
         cityEnter.sendKeys(city);
         Thread.sleep(2000);
+
         postalCode.sendKeys(postal);
         Thread.sleep(2000);
+
         dropdownOptions.get(3).click();
         selectMaritalStatus(state);
 
-        Thread.sleep(2000);
+      /*  Thread.sleep(2000);
         dropdownOptions.get(4).click();
-        selectMaritalStatus(county);
+        selectMaritalStatus(county);*/
 
-        Thread.sleep(2000);
-        email.sendKeys(emai);
-        Thread.sleep(2000);
-        selectMaritalStatus(marital);
-        Thread.sleep(2000);
-        addressOne.sendKeys(addres);
+
 
     }
 
@@ -337,6 +362,19 @@ public class DetailsPolicyPage {
         Thread.sleep(5000);
         Assert.assertEquals(pendingChange.get(3).getText(), status);
     }
+
+    public void policyFirstOption() throws InterruptedException {
+        Thread.sleep(5000);
+        List<WebElement> searchListView= driver.findElements(By.xpath("//*[contains(text(),'View')]"));
+                if (viewDetailsList.size() >= 1) {
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+                    wait.until(ExpectedConditions.elementToBeClickable(viewDetailsList.get(1))).click();
+                } else if (searchListView.size() >= 1) {
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+                    wait.until(ExpectedConditions.elementToBeClickable(searchListView.get(1))).click();
+                }
+    }
+
 
 
 }

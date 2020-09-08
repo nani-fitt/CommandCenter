@@ -9,13 +9,13 @@
       Scenario Outline: Policy record screen displayed
         Given user Sign In with correct credentials "<username>" and "<password>"
         When  select the Queue desired "<nameQueue>"
-        And   select the policy desired "<policyNumber>"
+        And   select first policy displayed
         Then  verify Details section is displayed
         And   verify Coverage section is displayed
 
         Examples:
-          | username | password |policyNumber |nameQueue|
-          | email    | password |policynumber |queu     |
+          | username | password | nameQueue|
+          | email    | password | queu     |
 
     @ViewPolicyDetails
     Scenario Outline: Details screen displayed
@@ -33,8 +33,8 @@
     @EditInsuranceInformation
     Scenario Outline: Edit primary insurance without change any information
       Given user Sign In with correct credentials "<username>" and "<password>"
-      When  enter the criteria desired "<criteria>"
-      And   select the policy desired "<criteria>"
+      When  select the Queue desired "<nameQueue>"
+      And   select first policy displayed
       Then  verify Details section is displayed
       And   select expandable list for details
       Then  verify primary insurance information are present
@@ -45,14 +45,14 @@
       Then  verify primary insurance information are present
 
       Examples:
-        | username | password |criteria       |
-        | email    | password |policynumberSe |
+        | username | password |nameQueue|
+        | email    | password |queu     |
 
     @EditInsuranceInformationChangeData
     Scenario Outline: Edit primary insurance change any information
       Given user Sign In with correct credentials "<username>" and "<password>"
-      When  enter the criteria desired "<criteria>"
-      And   select the policy desired "<criteria>"
+      When  select the Queue desired "<nameQueue>"
+      And   select first policy displayed
       Then  verify Details section is displayed
       And   select expandable list for details
       Then  verify primary insurance information are present
@@ -65,14 +65,14 @@
       And   verify Pending Change status is displayed
 
       Examples:
-        | username | password |criteria        |firstName  |email|maritalStatus|address|
-        | email    | password |policynumberSe1 |name       |mail |status       |addres |
+        | username | password |nameQueue  |firstName  |email|maritalStatus|address|
+        | email    | password |queu       |name       |mail |status       |addres |
 
     @EditInsuranceInfoIncorrectEmail
     Scenario Outline: Edit primary insurance with incorrect email
       Given user Sign In with correct credentials "<username>" and "<password>"
-      When  enter the criteria desired "<criteria>"
-      And   select the policy desired "<criteria>"
+      When  select the Queue desired "<nameQueue>"
+      And   select first policy displayed
       Then  verify Details section is displayed
       And   select expandable list for details
       Then  verify primary insurance information are present
@@ -84,14 +84,14 @@
       Then  verify the information error message
 
       Examples:
-        | username | password |criteria     |email         |
-        | email    | password |policynumberS|incorrectEmail|
+        | username | password |nameQueue |email         |
+        | email    | password |queu      |incorrectEmail|
 
     @AddSecondaryInsurance
     Scenario Outline: Add secondary insurance
       Given user Sign In with correct credentials "<username>" and "<password>"
-      When  enter the criteria desired "<criteria>"
-      And   select the policy desired "<criteria>"
+      When  select the Queue desired "<nameQueue>"
+      And   select first policy displayed
       Then  verify Details section is displayed
       And   select expandable list for details
       Then  verify primary insurance information are present
@@ -104,8 +104,8 @@
       And   verify Pending Change status is displayed
 
       Examples:
-        | username | password |criteria     |firstName|lastName|phoneNumber|dateBirth |city|state|county|postal|email   |maritalStatus   |address   |
-        | email    | password |policynumberS| nameadd |lastName|phone      |datebirth |city|state|county|postal|emailadd|maritalStatusadd|addressadd|
+        | username | password |nameQueue |firstName|lastName|phoneNumber|dateBirth |city|postal|state|county|email  |maritalStatus   |address  |
+        | email    | password |queu      | nameadd |lastName|phone      |datebirth |city|postal|state|county|mailadd|statusadd       |addresadd|
 
     @EditInsuranceInformationApproved
     Scenario Outline: Edit primary insurance change any information
