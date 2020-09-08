@@ -31,10 +31,10 @@ public class DetailsPolicyPage {
     @FindBy(xpath= "//*[contains(text(),'VIEW POLICY')]")
     List<WebElement> viewDetailsList;
 
-    @FindBy(xpath= "//*[contains(text(), 'DETAILS')]")
+    @FindBy(xpath= "//*[contains(text(), 'Details')]")
     WebElement detailOption;
 
-    @FindBy(xpath= "//*[contains(text(), 'COVERAGE')]")
+    @FindBy(xpath= "//*[contains(text(), 'Coverages')]")
     WebElement coverageOption;
 
     @FindBy(xpath= "//h2[contains(text(),'Insured')]")
@@ -90,6 +90,15 @@ public class DetailsPolicyPage {
 
     @FindBy(id= "siteSearchCriteria")
     WebElement searchCriteria;
+
+    @FindBy(id= "city")
+    WebElement cityEnter;
+
+    @FindBy(css= "div[class='MuiGrid-root requestInfo MuiGrid-item']")
+    List<WebElement> pendingChange;
+
+    @FindBy(css= "div[class='MuiGrid-root MuiGrid-item'] button")
+    List<WebElement> approvedAndReject;
 
 
 
@@ -199,9 +208,13 @@ public class DetailsPolicyPage {
     public void editInformation(String name, String mail,String status,String addres) throws InterruptedException {
         Thread.sleep(5000);
         firstName.click();
+        String valueName= firstName.getAttribute("value");
         Actions act= new Actions(driver);
-        act.doubleClick(firstName).build().perform();
-        firstName.sendKeys(Keys.DELETE);
+        while(valueName.length() >= 1) {
+            act.doubleClick(firstName).build().perform();
+            firstName.sendKeys(Keys.DELETE);
+            valueName= firstName.getAttribute("value");
+        }
         firstName.sendKeys(name);
         Thread.sleep(3000);
 
@@ -229,11 +242,10 @@ public class DetailsPolicyPage {
         addressOne.sendKeys(addres);
     }
 
-    public void showEditInsuranceInfo(String name,String mail, String status,String addrs) throws InterruptedException {
+    public void showEditInsuranceInfo(String mail, String status,String addrs) throws InterruptedException {
         Thread.sleep(5000);
        if(insuranceInfo.size() > 1)
        {
-           Assert.assertEquals(insuranceInfo.get(2).getText(),name);
            Assert.assertEquals(insuranceInfo.get(6).getText(),mail);
            Assert.assertEquals(insuranceInfo.get(10).getText(),status);
            Assert.assertEquals(insuranceInfo.get(12).getText(),addrs);
@@ -268,6 +280,62 @@ public class DetailsPolicyPage {
         searchCriteria.click();
         searchCriteria.sendKeys(policy);
         searchCriteria.sendKeys(Keys.ENTER);
+    }
+
+
+    public void pendingChangeStatus(String status) throws InterruptedException {
+        Thread.sleep(5000);
+        Assert.assertEquals(pendingChange.get(1).getText(), status);
+    }
+
+    public void enterInsuranceData(String name, String lastnam, String phoneN, String date, String city, String postal, String state, String county,
+                                   String emai, String marital, String addres) throws InterruptedException {
+        Thread.sleep(3000);
+        firstName.sendKeys(name);
+        Thread.sleep(2000);
+        lastName.sendKeys(lastnam);
+        Thread.sleep(2000);
+        phoneNumber.sendKeys(phoneN);
+        Thread.sleep(2000);
+        birthday.sendKeys(date);
+        Thread.sleep(2000);
+        cityEnter.sendKeys(city);
+        Thread.sleep(2000);
+        postalCode.sendKeys(postal);
+        Thread.sleep(2000);
+        dropdownOptions.get(3).click();
+        selectMaritalStatus(state);
+
+        Thread.sleep(2000);
+        dropdownOptions.get(4).click();
+        selectMaritalStatus(county);
+
+        Thread.sleep(2000);
+        email.sendKeys(emai);
+        Thread.sleep(2000);
+        selectMaritalStatus(marital);
+        Thread.sleep(2000);
+        addressOne.sendKeys(addres);
+
+    }
+
+    public void enterEmailOnly(String mail) throws InterruptedException {
+        Thread.sleep(5000);
+        email.click();
+        Actions act= new Actions(driver);
+        String valueEmail= email.getAttribute("value");
+        while(valueEmail.length() >= 1) {
+            act.doubleClick(email).build().perform();
+            email.sendKeys(Keys.DELETE);
+            valueEmail= email.getAttribute("value");
+        }
+        email.sendKeys(mail);
+        Thread.sleep(3000);
+    }
+
+    public void newSecondaryInsurance(String status) throws InterruptedException {
+        Thread.sleep(5000);
+        Assert.assertEquals(pendingChange.get(3).getText(), status);
     }
 
 

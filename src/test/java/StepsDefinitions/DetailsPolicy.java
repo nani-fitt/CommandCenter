@@ -12,6 +12,7 @@ import io.cucumber.java.en.When;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Random;
 
 public class DetailsPolicy extends TestBase {
 
@@ -101,10 +102,12 @@ public class DetailsPolicy extends TestBase {
         Log.info("Verify edit information");
         p= PropertyHelper.loadData();
         String firstNa= p.getProperty(firstName);
-        String ema= p.getProperty(email);
+        Random randomGenerator= new Random(System.currentTimeMillis());
+        int randomInt = randomGenerator.nextInt(10000);
+        String randomEmail=p.getProperty(email)+randomInt+"@mailinator.com";
         String maritalStat= p.getProperty(maritalStatus);
         String sddres= p.getProperty(address);
-        deta.editInformation(firstNa,ema,maritalStat,sddres);
+        deta.editInformation(firstNa,randomEmail,maritalStat,sddres);
 
     }
 
@@ -114,15 +117,16 @@ public class DetailsPolicy extends TestBase {
         deta.buttonSaveInsuranceInfo();
     }
 
-    @Then("verify the information is updated {string} {string} {string} {string}")
-    public void verifyTheInformationIsUpdated(String firstName, String email, String maritalStatus, String address) throws IOException, InterruptedException {
+    @Then("verify the information is updated {string} {string} {string}")
+    public void verifyTheInformationIsUpdated(String email, String maritalStatus, String address) throws IOException, InterruptedException {
        Log.info("Verify the information is updated");
         p= PropertyHelper.loadData();
-        String firstNa= p.getProperty(firstName);
-        String ema= p.getProperty(email);
+        Random randomGenerator= new Random(System.currentTimeMillis());
+        int randomInt = randomGenerator.nextInt(10000);
+        String randomEmail=p.getProperty(email)+randomInt+"@mailinator.com";
         String maritalStat= p.getProperty(maritalStatus);
-        String sddres= p.getProperty(address);
-        deta.showEditInsuranceInfo(firstNa, ema, maritalStat, sddres);
+        String sddres= p.getProperty(address)+ randomInt;
+        deta.showEditInsuranceInfo( randomEmail, maritalStat, sddres);
     }
 
     @And("select Lock for edit")
@@ -142,6 +146,70 @@ public class DetailsPolicy extends TestBase {
     @Then("verify the information error message")
     public void verifyTheInformationErrorMessage() {
        Log.info("Verify the error message");
+
     }
 
+    @And("verify Pending Change status is displayed")
+    public void verifyPendingChangeStatusIsDisplayed() throws InterruptedException, IOException {
+        Log.info("Verify pending change status is displayed");
+        p= PropertyHelper.loadData();
+        String status= p.getProperty("statusPending");
+        deta.pendingChangeStatus(status);
+    }
+
+    @And("select Add insurance button")
+    public void selectAddInsuranceButton() throws InterruptedException {
+        Log.info("Click on Add insurance information");
+        deta.buttonSaveInsuranceInfo();
+    }
+
+    @Then("verify the secondary Insurance is displayed")
+    public void verifyTheSecondaryInsuranceIsDisplayed() throws InterruptedException, IOException {
+        Log.info("verify secondary insurance displayed");
+        p= PropertyHelper.loadData();
+        String status= p.getProperty("statusCreate");
+        deta.newSecondaryInsurance(status);
+
+    }
+
+    @Then("enter the information desired {string} {string} {string} {string} {string} {string} {string}{string}{string} {string} {string}")
+    public void enterTheInformationDesired(String firstName, String lastName, String phoneNumber, String dateBirth, String city, String state, String county, String postal, String email, String maritalStatus, String address) throws IOException, InterruptedException {
+        Log.info("Enter the data desired Add insurance");
+        p= PropertyHelper.loadData();
+        Random randomGenerator= new Random(System.currentTimeMillis());
+        int randomInt = randomGenerator.nextInt(10000);
+        String firstNa= p.getProperty(firstName);
+        String last= p.getProperty(lastName);
+        String numberP= p.getProperty(phoneNumber)+randomInt;
+        String birth= p.getProperty(dateBirth);
+        String cit= p.getProperty(city);
+        String stateS= p.getProperty(state);
+        String coun= p.getProperty(county);
+        String codePostal= p.getProperty(postal);
+        String randomEmail=p.getProperty(email)+randomInt+"@mailinator.com";
+        String maritalStat= p.getProperty(maritalStatus);
+        String sddres= p.getProperty(address);
+
+        deta.enterInsuranceData(firstNa,last,numberP,birth,cit,codePostal,stateS,coun,randomEmail,maritalStat,sddres);
+
+    }
+
+    @Then("edit the information desired {string}")
+    public void editTheInformationDesired(String email) throws IOException, InterruptedException {
+        Log.info("Incorrect email");
+        p= PropertyHelper.loadData();
+        String mailIn= p.getProperty(email);
+        deta.enterEmailOnly(mailIn);
+
+    }
+
+    @When("select approve button")
+    public void selectApproveButton() {
+
+    }
+
+    @And("verify Approved status is displayed")
+    public void verifyApprovedStatusIsDisplayed() {
+
+    }
 }
