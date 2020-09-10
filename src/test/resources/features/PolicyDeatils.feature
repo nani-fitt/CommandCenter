@@ -41,7 +41,7 @@
       And   select edit primary insurance information
       And   select Lock for edit
       When  verify edit insurance screen are displayed
-      Then  verify Save button is desable
+      Then  verify Save button is disable
       Then  verify primary insurance information are present
 
       Examples:
@@ -62,11 +62,11 @@
       Then  edit the information desired "<firstName>" "<email>" "<maritalStatus>" "<address>"
       And   click on save button
       Then  verify the information is updated "<email>" "<maritalStatus>" "<address>"
-      And   verify Pending Change status is displayed
+      Then  verify status is updated "<status>"
 
       Examples:
-        | username | password |nameQueue  |firstName  |email|maritalStatus|address|
-        | email    | password |queu       |name       |mail |status       |addres |
+        | username | password |nameQueue  |firstName  |email|maritalStatus|address|status             |
+        | email    | password |queu       |name       |mail |status       |addres |statusPendingChange|
 
     @EditInsuranceInfoIncorrectEmail
     Scenario Outline: Edit primary insurance with incorrect email
@@ -98,14 +98,14 @@
       And   select Add insurance button
       And   select Lock for edit
       When  verify edit insurance screen are displayed
-      Then  enter the information desired "<firstName>" "<lastName>" "<phoneNumber>" "<dateBirth>" "<city>" "<postal>" "<state>""<county>""<email>" "<maritalStatus>" "<address>"
+      Then  enter the information desired "<firstName>""<lastName>""<phoneNumber>""<dateBirth>""<city>""<postal>""<state>""<county>""<email>""<maritalStatus>""<address>"
       And   click on save button
-      Then  verify the secondary Insurance is displayed
+      Then  verify status is updated "<status>"
       And   verify Pending Change status is displayed
 
       Examples:
-        | username | password |nameQueue |firstName|lastName|phoneNumber|dateBirth |city|postal|state|county|email  |maritalStatus   |address  |
-        | email    | password |queu      | nameadd |lastName|phone      |datebirth |city|postal|state|county|mailadd|statusadd       |addresadd|
+        | username | password |nameQueue |firstName|lastName|phoneNumber|dateBirth |city|postal|state|county|email    |maritalStatus   |address    |status             |
+        | email    | password |queu      |nameInsu |lastName|phone      |dateBirth |city|postal|state|county|emailInsu|maritalStatus   |addressInsu|statusNewInsurance |
 
     @EditInsuranceInformationApproved
     Scenario Outline: Edit primary insurance change any information
@@ -121,11 +121,31 @@
       Then  edit the information desired "<firstName>" "<email>" "<maritalStatus>" "<address>"
       And   click on save button
       Then  verify the information is updated "<email>" "<maritalStatus>" "<address>"
-      And   verify Pending Change status is displayed
+      Then  verify status is updated "<status>"
       When  select approve button
       And   verify Approved status is displayed
 
 
       Examples:
-        | username | password |criteria        |firstName  |email|maritalStatus|address|
-        | email    | password |policynumberSe1 |name       |mail |status       |addres |
+        | username | password |criteria        |firstName  |email|maritalStatus|address|status             |
+        | email    | password |policynumberSe1 |name       |mail |status       |addres |statusPendingChange|
+
+    @AddAdditionalInterest
+    Scenario Outline: Add additional Interest
+      Given user Sign In with correct credentials "<username>" and "<password>"
+      When  select the Queue desired "<nameQueue>"
+      And   select first policy displayed
+      Then  verify Details section is displayed
+      And   select expandable list for details
+      Then  verify primary insurance information are present
+      And   select Add additional interest button
+      And   select Lock for edit
+      When  verify additional interest screen are displayed
+      Then  enter additional interest information "<firstName>""<lastName>""<loanNumber>""<institutionName>""<address>""<city>""<postal>"
+      And   click on save button
+      Then  verify status is updated "<status>"
+      And   verify Pending Change status is displayed
+
+      Examples:
+        | username | password |status            |nameQueue |firstName    |lastName  |loanNumber|institutionName|address  |city  |postal  |
+        | email    | password |statusNewInterest |queu      |nameInterest |lastNameIn|loanNumber|institution    |addresInt|cityIn|postalIn|

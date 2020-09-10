@@ -95,7 +95,7 @@ public class DetailsPolicyPage {
     WebElement cityEnter;
 
     @FindBy(css= "div[class='MuiGrid-root requestInfo MuiGrid-item']")
-    List<WebElement> pendingChange;
+    List<WebElement> newChangePolicy;
 
     @FindBy(css= "div[class='MuiGrid-root MuiGrid-item'] button")
     List<WebElement> approvedAndReject;
@@ -103,6 +103,17 @@ public class DetailsPolicyPage {
     @FindBy(xpath= "//*[contains(text(),'Add insured')]")
     WebElement addInsurance;
 
+    @FindBy(xpath= "//*[contains(text(),'Add additional interest')]")
+    WebElement addAdditionalInterest;
+
+    @FindBy(id= "loanNumber")
+    WebElement loanNumber;
+
+    @FindBy(id= "institutionName")
+    WebElement instituionName;
+
+    @FindBy(id= "additionalInterestType")
+    WebElement additionalType;
 
 
     public DetailsPolicyPage(WebDriver driver)
@@ -293,10 +304,10 @@ public class DetailsPolicyPage {
 
     public void pendingChangeStatus(String status) throws InterruptedException {
         Thread.sleep(5000);
-        Assert.assertEquals(pendingChange.get(1).getText(), status);
+        Assert.assertEquals(newChangePolicy.get(0).getText(), status);
     }
 
-    public void enterInsuranceData(String name, String lastnam, String phoneN, String date, String city, String postal, String state, String county,
+    public void enterInsuranceData(String name, String lastnam, String phoneN, String dateB, String city, String postal, String state, String county,
                                    String emai, String marital, String addres) throws InterruptedException {
         Thread.sleep(5000);
         Actions act= new Actions(driver);
@@ -313,7 +324,7 @@ public class DetailsPolicyPage {
         Thread.sleep(2000);
 
         act.click(birthday).build().perform();
-        birthday.sendKeys(date);
+        birthday.sendKeys(dateB);
         Thread.sleep(2000);
 
         act.click(email).build().perform();
@@ -340,8 +351,6 @@ public class DetailsPolicyPage {
         dropdownOptions.get(4).click();
         selectMaritalStatus(county);*/
 
-
-
     }
 
     public void enterEmailOnly(String mail) throws InterruptedException {
@@ -358,9 +367,15 @@ public class DetailsPolicyPage {
         Thread.sleep(3000);
     }
 
-    public void newSecondaryInsurance(String status) throws InterruptedException {
+    public void newInformationCreate(String status) throws InterruptedException {
         Thread.sleep(5000);
-        Assert.assertEquals(pendingChange.get(3).getText(), status);
+        for (WebElement webElement : newChangePolicy) {
+
+            if (webElement.getText().equals(status)) {
+                Assert.assertEquals(webElement.getText(), status);
+                break;
+            }
+        }
     }
 
     public void policyFirstOption() throws InterruptedException {
@@ -374,6 +389,54 @@ public class DetailsPolicyPage {
                     wait.until(ExpectedConditions.elementToBeClickable(searchListView.get(1))).click();
                 }
     }
+
+    public void addAdditionalInterest() throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act= new Actions(driver);
+        act.moveToElement(addAdditionalInterest).doubleClick(addAdditionalInterest).build().perform();
+    }
+
+    public void verifyAddAdditionalInterestScreen() throws InterruptedException {
+        Thread.sleep(5000);
+        Assert.assertTrue(firstName.isDisplayed());
+        Assert.assertTrue(lastName.isDisplayed());
+        Assert.assertTrue(loanNumber.isDisplayed());
+        Assert.assertTrue(additionalType.isDisplayed());
+        Assert.assertTrue(instituionName.isDisplayed());
+        Assert.assertTrue(addressOne.isDisplayed());
+    }
+
+    public void addAdditionalInterest(String name, String lastnam,String loanN,String instname, String addres, String city, String postal) throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act= new Actions(driver);
+        act.click(firstName).build().perform();
+        firstName.sendKeys(name);
+        Thread.sleep(2000);
+
+        act.click(lastName).build().perform();
+        lastName.sendKeys(lastnam);
+        Thread.sleep(2000);
+
+        act.click(loanNumber).build().perform();
+        loanNumber.sendKeys(loanN);
+        Thread.sleep(2000);
+
+        act.click(instituionName).build().perform();
+        instituionName.sendKeys(instname);
+        Thread.sleep(2000);
+
+        act.click(instituionName).build().perform();
+        addressOne.sendKeys(addres);
+        Thread.sleep(2000);
+
+        cityEnter.sendKeys(city);
+        Thread.sleep(2000);
+
+        postalCode.sendKeys(postal);
+        Thread.sleep(2000);
+
+    }
+
 
 
 

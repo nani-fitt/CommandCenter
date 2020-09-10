@@ -84,8 +84,8 @@ public class DetailsPolicy extends TestBase {
         deta.detailsHeader(policy);
     }
 
-    @Then("verify Save button is desable")
-    public void verifySaveButtonIsDesable() throws InterruptedException {
+    @Then("verify Save button is disable")
+    public void verifySaveButtonIsDisable() throws InterruptedException {
         Log.info("Verify Save button");
         deta.buttonSaveInsuranceInfo();
         deta.buttonCancelInsuranceInfo();
@@ -155,6 +155,7 @@ public class DetailsPolicy extends TestBase {
         p= PropertyHelper.loadData();
         String status= p.getProperty("statusPending");
         deta.pendingChangeStatus(status);
+        validateWindows();
     }
 
     @And("select Add insurance button")
@@ -163,16 +164,16 @@ public class DetailsPolicy extends TestBase {
         deta.addInsuranceInfo();
     }
 
-    @Then("verify the secondary Insurance is displayed")
-    public void verifyTheSecondaryInsuranceIsDisplayed() throws InterruptedException, IOException {
+    @Then("verify status is updated {string}")
+    public void verifyTheSecondaryInsuranceIsDisplayed(String status) throws InterruptedException, IOException {
         Log.info("verify secondary insurance displayed");
         p= PropertyHelper.loadData();
-        String status= p.getProperty("statusCreate");
-        deta.newSecondaryInsurance(status);
+        String changePolicy= p.getProperty(status);
+        deta.newInformationCreate(changePolicy);
 
     }
 
-    @Then("enter the information desired {string} {string} {string} {string} {string} {string} {string}{string}{string} {string} {string}")
+    @Then("enter the information desired {string}{string}{string}{string}{string}{string}{string}{string}{string}{string}{string}")
     public void enterTheInformationDesired(String firstName, String lastName, String phoneNumber, String dateBirth, String city, String postal, String state, String county, String email, String maritalStatus, String address) throws IOException, InterruptedException {
         Log.info("Enter the data desired Add insurance");
         p= PropertyHelper.loadData();
@@ -218,4 +219,33 @@ public class DetailsPolicy extends TestBase {
         Log.info("Select first policy displayed");
         deta.policyFirstOption();
     }
+
+    @And("select Add additional interest button")
+    public void selectAddAdditionalInterestButton() throws InterruptedException {
+        Log.info("Select Add Additional interest button");
+        deta.addAdditionalInterest();
+    }
+
+    @When("verify additional interest screen are displayed")
+    public void verifyAdditionalInterestScreenAreDisplayed() throws InterruptedException {
+        Log.info("Verify Additional interest screen");
+        deta.verifyAddAdditionalInterestScreen();
+    }
+
+    @Then("enter additional interest information {string}{string}{string}{string}{string}{string}{string}")
+    public void enterAdditionalInterestInformation(String firstName, String lastName, String loanNumber, String institutionName, String address, String city, String postal) throws InterruptedException, IOException {
+        Log.info("Enter Additional Interest information");
+        p= PropertyHelper.loadData();
+        Random randomGenerator= new Random(System.currentTimeMillis());
+        int randomInt = randomGenerator.nextInt(10000);
+        String firstNa= p.getProperty(firstName);
+        String last= p.getProperty(lastName);
+        String loanN= p.getProperty(loanNumber)+randomInt;
+        String instName= p.getProperty(institutionName);
+        String addres= p.getProperty(address);
+        String cityIn= p.getProperty(city);
+        String codePostal= p.getProperty(postal);
+        deta.addAdditionalInterest(firstNa,last,loanN,instName,addres,cityIn,codePostal);
+    }
+
 }
