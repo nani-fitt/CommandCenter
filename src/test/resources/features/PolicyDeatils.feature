@@ -1,3 +1,4 @@
+@TestValidation
 @PolicyDetails
   Feature: Verify policy details are displayed
 
@@ -81,11 +82,29 @@
       When  verify edit insurance screen are displayed
       Then  edit the information desired "<email>"
       And   click on save button
-      Then  verify the information error message
+      Then  verify the information error message "<message>"
 
       Examples:
-        | username | password |nameQueue |email         |
-        | email    | password |queu      |incorrectEmail|
+        | username | password |nameQueue |email         |message      |
+        | email    | password |queu      |incorrectEmail|errorMessageP|
+
+    @EditInsuranceInfoIncorrectDateBirth
+    Scenario Outline: Edit primary insurance with incorrect date of birth
+      Given user Sign In with correct credentials "<username>" and "<password>"
+      When  select the Queue desired "<nameQueue>"
+      And   select first policy displayed
+      Then  verify Details section is displayed
+      And   select expandable list for details
+      Then  verify primary insurance information are present
+      And   select edit primary insurance information
+      And   select Lock for edit
+      When  verify edit insurance screen are displayed
+      Then  edit the date of birth "<dateBirth>"
+      Then  verify the information error message "<message>"
+
+      Examples:
+        | username | password |nameQueue |dateBirth     |message      |
+        | email    | password |queu      |incorrectBirth|errorMessageB|
 
     @AddSecondaryInsurance
     Scenario Outline: Add secondary insurance
@@ -101,7 +120,6 @@
       Then  enter the information desired "<firstName>""<lastName>""<phoneNumber>""<dateBirth>""<city>""<postal>""<state>""<county>""<email>""<maritalStatus>""<address>"
       And   click on save button
       Then  verify status is updated "<status>"
-      And   verify Pending Change status is displayed
 
       Examples:
         | username | password |nameQueue |firstName|lastName|phoneNumber|dateBirth |city|postal|state|county|email    |maritalStatus   |address    |status             |
@@ -123,12 +141,10 @@
       Then  verify the information is updated "<email>" "<maritalStatus>" "<address>"
       Then  verify status is updated "<status>"
       When  select approve button
-      And   verify Approved status is displayed
-
 
       Examples:
-        | username | password |criteria        |firstName  |email|maritalStatus|address|status             |
-        | email    | password |policynumberSe1 |name       |mail |status       |addres |statusPendingChange|
+        | username | password |criteria       |firstName  |email|maritalStatus|address|status             |
+        | email    | password |policynumberSe |name       |mail |status       |addres |statusPendingChange|
 
     @AddAdditionalInterest
     Scenario Outline: Add additional Interest

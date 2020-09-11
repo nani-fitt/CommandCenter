@@ -22,7 +22,7 @@ public class ElasticSearchSteps extends TestBase {
         search.selectPolicyCheck();
         Thread.sleep(2000);
         search.selectClaimsCheck();
-        validateWindows();
+
     }
 
     @When("select Inspection checkbook")
@@ -31,7 +31,7 @@ public class ElasticSearchSteps extends TestBase {
         search.selectPolicyCheck();
         Thread.sleep(2000);
         search.selectInspectionCheck();
-        validateWindows();
+
     }
     @Then("verify an error message is displayed")
     public void verifyAnErrorMessageIsDisplayed() throws IOException, InterruptedException {
@@ -39,7 +39,7 @@ public class ElasticSearchSteps extends TestBase {
         p= PropertyHelper.loadData();
         String message= p.getProperty("errorMessage");
         search.errorMessage(message);
-        validateWindows();
+       
     }
 
     @Then("verify the result displayed is correct {string}")
@@ -66,7 +66,7 @@ public class ElasticSearchSteps extends TestBase {
         p= PropertyHelper.loadData();
         String inspection= p.getProperty(criteria);
         search.verifyResultInspection(inspection);
-        validateWindows();
+
     }
 
     @Then("verify all the option are displayed correctly")

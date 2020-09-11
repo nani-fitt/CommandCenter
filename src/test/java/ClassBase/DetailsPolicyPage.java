@@ -115,6 +115,9 @@ public class DetailsPolicyPage {
     @FindBy(id= "additionalInterestType")
     WebElement additionalType;
 
+    @FindBy(css= "p[id='BirthdayDate-helper-text']")
+    WebElement messageBirthday;
+
 
     public DetailsPolicyPage(WebDriver driver)
     {
@@ -267,7 +270,7 @@ public class DetailsPolicyPage {
        if(insuranceInfo.size() > 1)
        {
            Assert.assertEquals(insuranceInfo.get(10).getText(),status);
-           Assert.assertEquals(insuranceInfo.get(12).getText(),addrs);
+           Assert.assertTrue(insuranceInfo.get(12).getText().contains(addrs));
        }
 
     }
@@ -435,6 +438,28 @@ public class DetailsPolicyPage {
         postalCode.sendKeys(postal);
         Thread.sleep(2000);
 
+    }
+
+    public void enterBirthayOnly(String dateBirth) throws InterruptedException {
+        Thread.sleep(5000);
+        birthday.click();
+        Actions act= new Actions(driver);
+        String valueEmail= birthday.getAttribute("value");
+        while(valueEmail.length() >= 1) {
+            act.doubleClick(birthday).build().perform();
+            birthday.sendKeys(Keys.DELETE);
+            valueEmail= email.getAttribute("value");
+        }
+        birthday.sendKeys(dateBirth);
+        Thread.sleep(3000);
+    }
+
+    public void errorMessage(String message) throws InterruptedException {
+        Thread.sleep(3000);
+        if(messageBirthday.isDisplayed())
+        {
+            Assert.assertEquals(messageBirthday.getText(), message);
+        }
     }
 
 

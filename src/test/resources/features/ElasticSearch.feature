@@ -1,3 +1,4 @@
+@TestValidation
 @ElasticSearch
 Feature: verify Elastic Search functionality
 

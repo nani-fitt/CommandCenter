@@ -86,7 +86,6 @@ public class SignInPage {
     public void emailPresent() throws InterruptedException {
         Thread.sleep(3000);
         Assert.assertTrue(email.isDisplayed());
-        Assert.assertTrue(pass.isDisplayed());
     }
 
     public void forgotPasswordDisplayed() throws InterruptedException {

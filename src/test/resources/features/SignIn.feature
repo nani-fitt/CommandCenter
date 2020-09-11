@@ -1,3 +1,4 @@
+@TestValidation
 @SignIn
   Feature: SignIn functionality
 

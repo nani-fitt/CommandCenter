@@ -125,7 +125,7 @@ public class DetailsPolicy extends TestBase {
         int randomInt = randomGenerator.nextInt(10000);
         String randomEmail=p.getProperty(email)+randomInt+"@mailinator.com";
         String maritalStat= p.getProperty(maritalStatus);
-        String sddres= p.getProperty(address)+ randomInt;
+        String sddres= p.getProperty(address);
         deta.showEditInsuranceInfo( randomEmail, maritalStat, sddres);
     }
 
@@ -143,9 +143,12 @@ public class DetailsPolicy extends TestBase {
         deta.searchPolicy(policy);
     }
 
-    @Then("verify the information error message")
-    public void verifyTheInformationErrorMessage() {
+    @Then("verify the information error message {string}")
+    public void verifyTheInformationErrorMessage(String message) throws IOException, InterruptedException {
        Log.info("Verify the error message");
+        p= PropertyHelper.loadData();
+        String mess= p.getProperty(message);
+       deta.errorMessage(mess);
         validateWindows();
     }
 
@@ -209,11 +212,6 @@ public class DetailsPolicy extends TestBase {
 
     }
 
-    @And("verify Approved status is displayed")
-    public void verifyApprovedStatusIsDisplayed() {
-
-    }
-
     @And("select first policy displayed")
     public void selectFirstPolicyDisplayed() throws InterruptedException {
         Log.info("Select first policy displayed");
@@ -248,4 +246,12 @@ public class DetailsPolicy extends TestBase {
         deta.addAdditionalInterest(firstNa,last,loanN,instName,addres,cityIn,codePostal);
     }
 
+    @Then("edit the date of birth {string}")
+    public void editTheDateOfBirth(String dateBirth) throws IOException, InterruptedException {
+        Log.info("Edit date of birth");
+        p= PropertyHelper.loadData();
+        String incorrectDate= p.getProperty(dateBirth);
+        deta.enterBirthayOnly(incorrectDate);
+
+    }
 }
