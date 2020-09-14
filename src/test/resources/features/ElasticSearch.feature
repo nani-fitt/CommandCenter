@@ -13,7 +13,7 @@ Feature: verify Elastic Search functionality
 
     Examples:
       | username | password |criteria          |
-      | email    | password |policynumberSearch|
+      | email    | password |policyNumberSearch|
 
   @ElasticSearchClaims
   Scenario Outline: Search by Claims correct data
@@ -24,7 +24,7 @@ Feature: verify Elastic Search functionality
 
     Examples:
       | username | password |criteria     |
-      | email    | password |policyclaims |
+      | email    | password |policyClaims |
 
   @ElasticSearchInspectionCorrect
   Scenario Outline: Search by Inspection correct data
@@ -35,7 +35,7 @@ Feature: verify Elastic Search functionality
 
     Examples:
       | username | password |criteria         |
-      | email    | password |policyinspection |
+      | email    | password |policyInspection |
 
   @ElasticSearchPolicyIncorrect
   Scenario Outline: Search by Policy incorrect data
@@ -45,7 +45,7 @@ Feature: verify Elastic Search functionality
 
     Examples:
       | username | password |criteria     |
-      | email    | password |policynumberI|
+      | email    | password |policyNumberI|
 
   @ElasticSearchClaimsIncorrect
   Scenario Outline: Search by Claims incorrect data
@@ -56,7 +56,7 @@ Feature: verify Elastic Search functionality
 
     Examples:
       | username | password |criteria      |
-      | email    | password |policyclaimsI |
+      | email    | password |policyClaimsI |
 
   @ElasticSearchInspectionIncorrect
   Scenario Outline: Search by Inspection incorrect data
@@ -67,7 +67,7 @@ Feature: verify Elastic Search functionality
 
     Examples:
       | username | password |criteria          |
-      | email    | password |policyinspectionI |
+      | email    | password |policyInspectionI |
 
   @ElasticSearchSelectAll
   Scenario Outline: Incorrect data selecting all the criteria

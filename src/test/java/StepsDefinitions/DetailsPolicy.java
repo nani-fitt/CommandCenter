@@ -37,10 +37,10 @@ public class DetailsPolicy extends TestBase {
     }
 
     @And("select the policy desired {string}")
-    public void selectThePolicyDesired(String policyNumber) throws IOException, InterruptedException {
+    public void selectThePolicyDesired(String criteria) throws IOException, InterruptedException {
         Log.info("Select the policy desired");
         p= PropertyHelper.loadData();
-        String policy= p.getProperty(policyNumber);
+        String policy= p.getProperty(criteria);
         deta.policySelect(policy);
 
     }
@@ -169,7 +169,7 @@ public class DetailsPolicy extends TestBase {
 
     @Then("verify status is updated {string}")
     public void verifyTheSecondaryInsuranceIsDisplayed(String status) throws InterruptedException, IOException {
-        Log.info("verify secondary insurance displayed");
+        Log.info("verify status is updated");
         p= PropertyHelper.loadData();
         String changePolicy= p.getProperty(status);
         deta.newInformationCreate(changePolicy);
@@ -212,10 +212,12 @@ public class DetailsPolicy extends TestBase {
 
     }
 
-    @And("select first policy displayed")
-    public void selectFirstPolicyDisplayed() throws InterruptedException {
+    @And("select first policy displayed {string}")
+    public void selectFirstPolicyDisplayed(String index) throws InterruptedException, IOException {
         Log.info("Select first policy displayed");
-        deta.policyFirstOption();
+        p= PropertyHelper.loadData();
+        String policyPosition= p.getProperty(index);
+        deta.policyFirstOption(policyPosition);
     }
 
     @And("select Add additional interest button")

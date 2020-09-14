@@ -4,19 +4,17 @@
 
     Background:
 
-
-
        @ViewPolicyOption
       Scenario Outline: Policy record screen displayed
         Given user Sign In with correct credentials "<username>" and "<password>"
         When  select the Queue desired "<nameQueue>"
-        And   select first policy displayed
+         And  select first policy displayed "<index>"
         Then  verify Details section is displayed
         And   verify Coverage section is displayed
 
         Examples:
-          | username | password | nameQueue|
-          | email    | password | queu     |
+          | username | password | nameQueue|index      |
+          | email    | password | queu     |policyIndex|
 
     @ViewPolicyDetails
     Scenario Outline: Details screen displayed
@@ -29,13 +27,13 @@
 
       Examples:
         | username | password |criteria      |
-        | email    | password |policynumberSe|
+        | email    | password |policyNumberSe|
 
     @EditInsuranceInformation
     Scenario Outline: Edit primary insurance without change any information
       Given user Sign In with correct credentials "<username>" and "<password>"
       When  select the Queue desired "<nameQueue>"
-      And   select first policy displayed
+      And   select first policy displayed "<index>"
       Then  verify Details section is displayed
       And   select expandable list for details
       Then  verify primary insurance information are present
@@ -46,14 +44,14 @@
       Then  verify primary insurance information are present
 
       Examples:
-        | username | password |nameQueue|
-        | email    | password |queu     |
+        | username | password |nameQueue|index      |
+        | email    | password |queu     |policyIndex|
 
     @EditInsuranceInformationChangeData
     Scenario Outline: Edit primary insurance change any information
       Given user Sign In with correct credentials "<username>" and "<password>"
       When  select the Queue desired "<nameQueue>"
-      And   select first policy displayed
+      And   select first policy displayed "<index>"
       Then  verify Details section is displayed
       And   select expandable list for details
       Then  verify primary insurance information are present
@@ -66,33 +64,14 @@
       Then  verify status is updated "<status>"
 
       Examples:
-        | username | password |nameQueue  |firstName  |email|maritalStatus|address|status             |
-        | email    | password |queu       |name       |mail |status       |addres |statusPendingChange|
-
-    @EditInsuranceInfoIncorrectEmail
-    Scenario Outline: Edit primary insurance with incorrect email
-      Given user Sign In with correct credentials "<username>" and "<password>"
-      When  select the Queue desired "<nameQueue>"
-      And   select first policy displayed
-      Then  verify Details section is displayed
-      And   select expandable list for details
-      Then  verify primary insurance information are present
-      And   select edit primary insurance information
-      And   select Lock for edit
-      When  verify edit insurance screen are displayed
-      Then  edit the information desired "<email>"
-      And   click on save button
-      Then  verify the information error message "<message>"
-
-      Examples:
-        | username | password |nameQueue |email         |message      |
-        | email    | password |queu      |incorrectEmail|errorMessageP|
+        | username | password |nameQueue  |index          |firstName  |email|maritalStatus|address|status  |
+        | email    | password |queu       |policyIndexSe  |name       |mail |status       |addres |Approved|
 
     @EditInsuranceInfoIncorrectDateBirth
     Scenario Outline: Edit primary insurance with incorrect date of birth
       Given user Sign In with correct credentials "<username>" and "<password>"
       When  select the Queue desired "<nameQueue>"
-      And   select first policy displayed
+      And   select first policy displayed "<index>"
       Then  verify Details section is displayed
       And   select expandable list for details
       Then  verify primary insurance information are present
@@ -103,14 +82,14 @@
       Then  verify the information error message "<message>"
 
       Examples:
-        | username | password |nameQueue |dateBirth     |message      |
-        | email    | password |queu      |incorrectBirth|errorMessageB|
+        | username | password |nameQueue |index         |dateBirth     |message      |
+        | email    | password |queu      |policyIndexSe2|incorrectBirth|errorMessageB|
 
     @AddSecondaryInsurance
     Scenario Outline: Add secondary insurance
       Given user Sign In with correct credentials "<username>" and "<password>"
       When  select the Queue desired "<nameQueue>"
-      And   select first policy displayed
+      And   select first policy displayed "<index>"
       Then  verify Details section is displayed
       And   select expandable list for details
       Then  verify primary insurance information are present
@@ -122,8 +101,8 @@
       Then  verify status is updated "<status>"
 
       Examples:
-        | username | password |nameQueue |firstName|lastName|phoneNumber|dateBirth |city|postal|state|county|email    |maritalStatus   |address    |status             |
-        | email    | password |queu      |nameInsu |lastName|phone      |dateBirth |city|postal|state|county|emailInsu|maritalStatus   |addressInsu|statusNewInsurance |
+        | username | password |nameQueue |index          |firstName|lastName|phoneNumber|dateBirth |city|postal|state|county|email    |maritalStatus   |address    |status             |
+        | email    | password |queu      |policyIndexSe2 |nameInsu |lastName|phone      |dateBirth |city|postal|state|county|emailInsu|maritalStatus   |addressInsu|statusNewInsurance |
 
     @EditInsuranceInformationApproved
     Scenario Outline: Edit primary insurance change any information
@@ -140,17 +119,17 @@
       And   click on save button
       Then  verify the information is updated "<email>" "<maritalStatus>" "<address>"
       Then  verify status is updated "<status>"
-      When  select approve button
+
 
       Examples:
-        | username | password |criteria       |firstName  |email|maritalStatus|address|status             |
-        | email    | password |policynumberSe |name       |mail |status       |addres |statusPendingChange|
+        | username | password |criteria       |firstName  |email|maritalStatus|address|status  |
+        | email    | password |policyNumberSe |name       |mail |status       |addres |Approved|
 
     @AddAdditionalInterest
     Scenario Outline: Add additional Interest
       Given user Sign In with correct credentials "<username>" and "<password>"
-      When  select the Queue desired "<nameQueue>"
-      And   select first policy displayed
+      When  enter the criteria desired "<criteria>"
+      And   select the policy desired "<criteria>"
       Then  verify Details section is displayed
       And   select expandable list for details
       Then  verify primary insurance information are present
@@ -160,8 +139,7 @@
       Then  enter additional interest information "<firstName>""<lastName>""<loanNumber>""<institutionName>""<address>""<city>""<postal>"
       And   click on save button
       Then  verify status is updated "<status>"
-      And   verify Pending Change status is displayed
 
       Examples:
-        | username | password |status            |nameQueue |firstName    |lastName  |loanNumber|institutionName|address  |city  |postal  |
-        | email    | password |statusNewInterest |queu      |nameInterest |lastNameIn|loanNumber|institution    |addresInt|cityIn|postalIn|
+        | username | password |status   |criteria     |firstName    |lastName  |loanNumber|institutionName|address  |city  |postal  |
+        | email    | password |Approved |policyNumber |nameInterest |lastNameIn|loanNumber|institution    |addresInt|cityIn|postalIn|

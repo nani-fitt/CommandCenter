@@ -9,7 +9,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -25,10 +24,10 @@ public class DetailsPolicyPage {
     @FindBy(xpath= "//p[contains(text(),'NEW')]")
     List<WebElement> underwritingQueueNew;
 
-    @FindBy(xpath= "//span[contains(text(),'OH')]")
+    @FindBy(xpath= "//*[contains(text(),'OH')]")
     List<WebElement> policyListNumber;
 
-    @FindBy(xpath= "//*[contains(text(),'VIEW POLICY')]")
+    @FindBy(id= "viewPolicyButton")
     List<WebElement> viewDetailsList;
 
     @FindBy(xpath= "//*[contains(text(), 'Details')]")
@@ -76,8 +75,11 @@ public class DetailsPolicyPage {
     @FindBy(id= "postalCode")
     WebElement postalCode;
 
-    @FindBy(css= "div[class='MuiButtonGroup-root MuiButtonGroup-fullWidth MuiButtonGroup-contained'] button")
-    List<WebElement> buttonSaveCancel;
+    @FindBy(id= "saveInsuredButton")
+    List<WebElement> buttonSave;
+
+    @FindBy(id= "cancelInsuredButton")
+    List<WebElement> buttonCancel;
 
     @FindBy(css= "button[class='MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary']")
     List<WebElement> lockOption;
@@ -100,7 +102,7 @@ public class DetailsPolicyPage {
     @FindBy(css= "div[class='MuiGrid-root MuiGrid-item'] button")
     List<WebElement> approvedAndReject;
 
-    @FindBy(xpath= "//*[contains(text(),'Add insured')]")
+    @FindBy(id= "addInsuredButton")
     WebElement addInsurance;
 
     @FindBy(xpath= "//*[contains(text(),'Add additional interest')]")
@@ -143,7 +145,7 @@ public class DetailsPolicyPage {
 
     public void policySelect(String policyNumber) throws InterruptedException {
         Thread.sleep(5000);
-        List<WebElement> searchListView= driver.findElements(By.xpath("//*[contains(text(),'View')]"));
+        List<WebElement> searchListView= driver.findElements(By.xpath("//*[contains(text(),'VIEW POLICY')]"));
         for (int i = 0; i < policyListNumber.size(); i++) {
             if(policyListNumber.get(i).getText().equals(policyNumber))
             {
@@ -209,13 +211,13 @@ public class DetailsPolicyPage {
     public void buttonSaveInsuranceInfo() throws InterruptedException {
         Thread.sleep(5000);
         WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(80));
-        wait.until(ExpectedConditions.elementToBeClickable(buttonSaveCancel.get(0))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(buttonSave.get(0))).click();
         Thread.sleep(5000);
     }
     public void buttonCancelInsuranceInfo() throws InterruptedException {
         Thread.sleep(5000);
         WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(80));
-        wait.until(ExpectedConditions.elementToBeClickable(buttonSaveCancel.get(1))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(buttonCancel.get(0))).click();
         Thread.sleep(2000);
     }
 
@@ -381,15 +383,16 @@ public class DetailsPolicyPage {
         }
     }
 
-    public void policyFirstOption() throws InterruptedException {
+    public void policyFirstOption(String policyPosition) throws InterruptedException {
         Thread.sleep(5000);
-        List<WebElement> searchListView= driver.findElements(By.xpath("//*[contains(text(),'View')]"));
+        int i= Integer.parseInt(policyPosition);
+        List<WebElement> searchListView= driver.findElements(By.xpath("//*[contains(text(),'VIEW POLICY')]"));
                 if (viewDetailsList.size() >= 1) {
                     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-                    wait.until(ExpectedConditions.elementToBeClickable(viewDetailsList.get(1))).click();
+                    wait.until(ExpectedConditions.elementToBeClickable(viewDetailsList.get(i))).click();
                 } else if (searchListView.size() >= 1) {
                     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-                    wait.until(ExpectedConditions.elementToBeClickable(searchListView.get(1))).click();
+                    wait.until(ExpectedConditions.elementToBeClickable(searchListView.get(i))).click();
                 }
     }
 

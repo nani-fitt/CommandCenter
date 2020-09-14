@@ -39,7 +39,7 @@ public class ElasticSearchSteps extends TestBase {
         p= PropertyHelper.loadData();
         String message= p.getProperty("errorMessage");
         search.errorMessage(message);
-       
+
     }
 
     @Then("verify the result displayed is correct {string}")
