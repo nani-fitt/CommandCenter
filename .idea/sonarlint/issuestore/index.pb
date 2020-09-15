@@ -60,3 +60,7 @@ U
 %target/test-classes/extent-config.xml,3/3/332a7fba89515ed106946f9770d8acf1aba7c0db
 D
 target/cucumber.json,f/f/ffb1e574a891cfb57e02364d4412a78506dc5108
+b
+2src/test/resources/features/BillingSection.feature,8/1/8118a5fbbbf7276cea50c9bc2b471a2b19248999
+h
+8src/test/resources/features/EndorsementCoverages.feature,5/5/5594de35f791d77ba315d7ce54d7756649d58d09

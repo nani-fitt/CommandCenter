@@ -70,10 +70,12 @@ public class DetailsPolicy extends TestBase {
 
     }
 
-    @And("select edit primary insurance information")
-    public void selectEditPrimayInsuranceInformation() throws InterruptedException {
+    @And("select edit information {string}")
+    public void selectEditPrimayInsuranceInformation(String editButtonOption) throws InterruptedException, IOException {
         Log.info("Select edit primary insurance");
-        deta.editMenu();
+        p= PropertyHelper.loadData();
+        String editSelect= p.getProperty(editButtonOption);
+        deta.editMenu(editSelect);
     }
 
     @Then("verify insurance information are displayed {string}")
@@ -254,6 +256,28 @@ public class DetailsPolicy extends TestBase {
         p= PropertyHelper.loadData();
         String incorrectDate= p.getProperty(dateBirth);
         deta.enterBirthayOnly(incorrectDate);
+
+    }
+    @Then("edit the additional information desired {string}{string}{string}")
+    public void editTheAdditionalInformationDesired(String lastName, String loanNumber, String institutionName) throws IOException, InterruptedException {
+        Log.info("Edit Additional Interest");
+        p= PropertyHelper.loadData();
+        String lastNa= p.getProperty(lastName);
+        String loanN= p.getProperty(loanNumber);
+        String instName= p.getProperty(institutionName);
+        deta.editInterest(lastNa,loanN,instName);
+
+    }
+
+    @And("click on save button interest")
+    public void clickOnSaveButtonInterest() throws InterruptedException {
+        Log.info("Save interest button");
+        deta.buttonSaveInterest();
+    }
+
+    @And("verify Personal Property and Additional Living values")
+    public void verifyPersonalPropertyAndAdditionalLivingValues() {
+        Log.info("verify personal property and additional living values change");
 
     }
 }
