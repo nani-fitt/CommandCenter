@@ -1,5 +1,6 @@
 package ClassBase;
 
+import org.apache.tools.ant.types.selectors.SelectSelector;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -123,16 +124,39 @@ public class CoveragePolicyRecord {
          double dwellingInt= Double.parseDouble(dwelling);
          double percentProperty= Double.parseDouble(percentApplied.get(2).getText().replace("%",""));
          double personalPropertyValue= dwellingInt * (percentProperty/100);
-         double personalRealValue= Double.parseDouble(coveragesNum.get(3).getText().replace("$",""));
-         Assert.assertEquals(personalPropertyValue,personalRealValue);
+         String valuePP= String.valueOf(personalPropertyValue);
+         System.out.println("value personal property calculate"+ " "+ valuePP);
+         String personalRealValue= coveragesNum.get(4).getText().replace("$","").
+                replace(".00", ".0").replace(",","");
+         System.out.println("value personal property real"+ " "+ personalRealValue);
+          Assert.assertEquals(valuePP,personalRealValue);
 
          Thread.sleep(1000);
          Actions act= new Actions(driver);
          act.moveToElement(percentApplied.get(3)).build().perform();
-        double additionalPercent= Double.parseDouble(percentApplied.get(2).getText().replace("%",""));
+        double additionalPercent= Double.parseDouble(percentApplied.get(3).getText().replace("%",""));
         double additionalValue= dwellingInt * (additionalPercent/100);
-        double additionalRealValue= Double.parseDouble(coveragesNum.get(6).getText().replace("$",""));
-        Assert.assertEquals(additionalValue,additionalRealValue);
+        String valueALE= String.valueOf(additionalValue);
+        System.out.println("value additional living expense"+ " "+ valueALE);
+        String additionalRealValue= coveragesNum.get(6).getText().replace("$","").
+                replace(".00", ".0").replace(",","");
+        System.out.println("value additional living expense"+ " "+ additionalRealValue);
+        Assert.assertEquals(valueALE,additionalRealValue);
+
+        if (percentApplied.get(1).getText().equals("0%"))
+        {
+            Assert.assertEquals("$0.00", coveragesNum.get(2).getText());
+        }else
+        {
+            double otherStructure= Double.parseDouble(percentApplied.get(1).getText().replace("%",""));
+            double otherStructureValue= dwellingInt * (otherStructure/100);
+            String valueOther= String.valueOf(otherStructureValue);
+            System.out.println("value other structure"+ " "+ valueALE);
+            String otherRealValue= coveragesNum.get(2).getText().replace("$","").
+                    replace(".00", ".0").replace(",","");
+            System.out.println("value other structure"+ " "+ otherRealValue);
+            Assert.assertEquals(valueOther,otherRealValue);
+        }
     }
 
     public void verifyStickyBar() throws InterruptedException {

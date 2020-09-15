@@ -36,7 +36,7 @@ public class CoveragePolicySteps extends TestBase {
     @Then("select edit Dwelling option")
     public void selectEditDwellingOption() throws InterruptedException {
         Log.info("Select edit dwelling option");
-        coverage.editMenuCoverage("Coverage");
+        coverage.editMenuCoverage("Dwelling");
     }
 
     @When("enter the values desired {string}")
@@ -73,6 +73,8 @@ public class CoveragePolicySteps extends TestBase {
     }
 
     @And("verify sticky bar is displayed")
-    public void verifyStickyBarIsDisplayed() {
+    public void verifyStickyBarIsDisplayed() throws InterruptedException {
+        Log.info("verify sticky bar is displayed");
+        coverage.verifyStickyBar();
     }
 }
