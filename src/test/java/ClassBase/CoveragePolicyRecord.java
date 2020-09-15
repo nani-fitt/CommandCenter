@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Stream;
 
 
 public class CoveragePolicyRecord {
@@ -48,6 +49,9 @@ public class CoveragePolicyRecord {
     @FindBy(id = "saveStickyBarButton")
     WebElement saveIssueButton;
 
+    @FindBy(css = "div[class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input]")
+    WebElement otherStructureSelect;
+
 
     public CoveragePolicyRecord (WebDriver driver)
     {
@@ -75,13 +79,11 @@ public class CoveragePolicyRecord {
             wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(1))).click();
             Thread.sleep(3000);
             wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(3))).click();
-        } else if (valueSelect.equals("Additional Interest")) {
-            int pos = page.propertyMenu.size() - 1;
-            int posE = page.editSelect.size() - 1;
-            wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(pos))).click();
+        } else if (valueSelect.equals("Other structure")) {
+            wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(2))).click();
             Thread.sleep(3000);
             Actions act = new Actions(driver);
-            act.moveToElement(page.editSelect.get(posE)).doubleClick(page.editSelect.get(posE)).build().perform();
+            act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(4)).build().perform();
 
         }
     }
@@ -164,6 +166,38 @@ public class CoveragePolicyRecord {
        Assert.assertTrue(issueButton.isDisplayed());
        Assert.assertTrue(saveIssueButton.isDisplayed());
     }
+
+    public void selectOtherStructure(String percent) throws InterruptedException {
+        Thread.sleep(3000);
+        Actions act= new Actions(driver);
+        act.moveToElement(otherStructureSelect).click().build().perform();
+        DetailsPolicyPage page = new DetailsPolicyPage(driver);
+        if(page.editSelect.size() >1)
+        {
+          page.editSelect.stream().filter(webElement -> webElement
+                  .getAttribute("data-value").equals(percent))
+                  .forEach(WebElement::click);
+        }
+    }
+
+    public void correctPercentApplied(String value) throws InterruptedException {
+        Thread.sleep(3000);
+        String dwellingValue= coveragesNum.get(0).getText().replace("$","")
+                .replace(".00", "").replace(",",".");
+        double percent= Double.parseDouble(value);
+        double dwellingConvert= Double.parseDouble(dwellingValue);
+        double valueApplied= dwellingConvert * percent/100;
+
+        String revertDwelling= String.valueOf(valueApplied);
+        System.out.println("value applied"+ " "+ revertDwelling);
+        String resultShow= coveragesNum.get(2).getText().replace("$","").
+                replace(".00", ".0").replace(",","");
+        System.out.println("value coverted"+ " "+ resultShow);
+        Assert.assertEquals(revertDwelling,resultShow);
+
+
+    }
+
 
 
 

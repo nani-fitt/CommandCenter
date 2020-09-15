@@ -48,9 +48,9 @@ public class CoveragePolicySteps extends TestBase {
 
     }
 
-    @And("click on save dwelling button")
+    @And("click on save coverage button")
     public void clickOnSaveDwellingButton() throws InterruptedException {
-        Log.info("click on save dwelling button");
+        Log.info("click on save coverage button");
         coverage.clickOnSaveDwelling();
     }
 
@@ -76,5 +76,27 @@ public class CoveragePolicySteps extends TestBase {
     public void verifyStickyBarIsDisplayed() throws InterruptedException {
         Log.info("verify sticky bar is displayed");
         coverage.verifyStickyBar();
+    }
+
+    @When("select the percent to apply {string}")
+    public void selectThePercentToApply(String dropdownValues) throws IOException, InterruptedException {
+        Log.info("select percent desired");
+        p= PropertyHelper.loadData();
+        String other= p.getProperty(dropdownValues);
+        coverage.selectOtherStructure(other);
+    }
+
+    @And("verify percent applied is correct {string}")
+    public void verifyPercentAppliedIsCorrect(String dropdownValues) throws IOException, InterruptedException {
+        Log.info("verify percent applied is correct");
+        p= PropertyHelper.loadData();
+        String other= p.getProperty(dropdownValues);
+        coverage.correctPercentApplied(other);
+    }
+
+    @Then("select edit Other structure option")
+    public void selectEditOtherStructureOption() throws InterruptedException {
+        Log.info("select edit other structure");
+        coverage.editMenuCoverage("Other structure");
     }
 }

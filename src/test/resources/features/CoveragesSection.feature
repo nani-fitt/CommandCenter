@@ -28,7 +28,7 @@ Feature: Verify coverage section
     Then  select edit Dwelling option
     And   select Lock for edit
     When  enter the values desired "<coveragesValues>"
-    And   click on save dwelling button
+    And   click on save coverage button
     Then  verify the information coverage error message "<message>"
 
     Examples:
@@ -45,7 +45,7 @@ Feature: Verify coverage section
     Then  select edit Dwelling option
     And   select Lock for edit
     When  enter the values desired "<coveragesValues>"
-    And   click on save dwelling button
+    And   click on save coverage button
     Then  verify the information coverage error message "<message>"
 
     Examples:
@@ -62,7 +62,7 @@ Feature: Verify coverage section
     Then  select edit Dwelling option
     And   select Lock for edit
     When  enter the values desired "<coveragesValues>"
-    And   click on save dwelling button
+    And   click on save coverage button
     Then  verify status is updated "<status>"
     And   verify Personal Property and Additional Living values "<coveragesValues>"
     And   verify sticky bar is displayed
@@ -70,3 +70,22 @@ Feature: Verify coverage section
     Examples:
       | username | password |criteria     |coveragesValues|status  |
       | email    | password |policyNumberC|coveragesGood  |Approved|
+
+  @ChangeOtherStructureCorrect
+  Scenario Outline: Select other structure value percent to apply
+    Given user Sign In with correct credentials "<username>" and "<password>"
+    When  enter the criteria desired "<criteria>"
+    And   select the policy desired "<criteria>"
+    Then  verify Coverage section is displayed
+    And   select expandable list for coverage
+    Then  select edit Other structure option
+    And   select Lock for edit
+    When  select the percent to apply "<dropdownValues>"
+    And   click on save coverage button
+    Then  verify status is updated "<status>"
+    And   verify percent applied is correct "<dropdownValues>"
+    And   verify sticky bar is displayed
+
+    Examples:
+      | username | password |criteria     |dropdownValues|status  |
+      | email    | password |policyNumberC|percentSelect |Approved|
