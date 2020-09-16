@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 
@@ -105,7 +106,7 @@ public class CoveragePolicyRecord {
 
                 break;
             }
-            case "Personal Liability": {
+            case "Personal liability": {
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(5))).click();
                 Thread.sleep(3000);
                 Actions act = new Actions(driver);
@@ -210,8 +211,9 @@ public class CoveragePolicyRecord {
         DetailsPolicyPage page = new DetailsPolicyPage(driver);
         if(page.editSelect.size() >1)
         {
-          page.editSelect.stream().filter(webElement -> webElement.getText().equals(percent))
-                  .forEach(WebElement::click);
+            Optional<WebElement> correct = page.editSelect.stream().filter((element) -> element.getText().equals(percent))
+                    .findFirst();
+            correct.ifPresent(webElement -> wait.until(ExpectedConditions.elementToBeClickable(webElement)).click());
         }
     }
 

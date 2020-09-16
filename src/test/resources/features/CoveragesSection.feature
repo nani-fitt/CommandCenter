@@ -158,7 +158,7 @@ Feature: Verify coverage section
 
     Examples:
       | username | password |criteria     |dropdownValues|status  |
-      | email    | password |policyNumberC|percentSelect |Approved|
+      | email    | password |policyNumberC|percentSelectA|Approved|
 
   @ChangePersonalLiability
   Scenario Outline: Select personal liability desired
