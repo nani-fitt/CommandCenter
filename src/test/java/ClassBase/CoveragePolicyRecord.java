@@ -1,6 +1,6 @@
 package ClassBase;
 
-import org.apache.tools.ant.types.selectors.SelectSelector;
+
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -49,7 +49,7 @@ public class CoveragePolicyRecord {
     @FindBy(id = "saveStickyBarButton")
     WebElement saveIssueButton;
 
-    @FindBy(css = "div[class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input]")
+    @FindBy(css = "div[class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']")
     WebElement otherStructureSelect;
 
 
@@ -75,16 +75,52 @@ public class CoveragePolicyRecord {
         Thread.sleep(5000);
         DetailsPolicyPage page = new DetailsPolicyPage(driver);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-        if (valueSelect.equals("Dwelling")) {
-            wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(1))).click();
-            Thread.sleep(3000);
-            wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(3))).click();
-        } else if (valueSelect.equals("Other structure")) {
-            wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(2))).click();
-            Thread.sleep(3000);
-            Actions act = new Actions(driver);
-            act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(4)).build().perform();
+        switch (valueSelect) {
+            case "Dwelling":
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(1))).click();
+                Thread.sleep(3000);
+                wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(3))).click();
+                break;
+            case "Other structure": {
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(2))).click();
+                Thread.sleep(3000);
+                Actions act = new Actions(driver);
+                act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(4)).build().perform();
 
+                break;
+            }
+            case "Personal Property": {
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(3))).click();
+                Thread.sleep(3000);
+                Actions act = new Actions(driver);
+                act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(5)).build().perform();
+
+                break;
+            }
+            case "Additional Living": {
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(4))).click();
+                Thread.sleep(3000);
+                Actions act = new Actions(driver);
+                act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(6)).build().perform();
+
+                break;
+            }
+            case "Personal Liability": {
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(5))).click();
+                Thread.sleep(3000);
+                Actions act = new Actions(driver);
+                act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(7)).build().perform();
+
+                break;
+            }
+            case "Medical Payment": {
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(6))).click();
+                Thread.sleep(3000);
+                Actions act = new Actions(driver);
+                act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(8)).build().perform();
+
+                break;
+            }
         }
     }
 
@@ -168,33 +204,47 @@ public class CoveragePolicyRecord {
     }
 
     public void selectOtherStructure(String percent) throws InterruptedException {
-        Thread.sleep(3000);
-        Actions act= new Actions(driver);
-        act.moveToElement(otherStructureSelect).click().build().perform();
+        Thread.sleep(5000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+        wait.until(ExpectedConditions.elementToBeClickable(otherStructureSelect)).click();
         DetailsPolicyPage page = new DetailsPolicyPage(driver);
         if(page.editSelect.size() >1)
         {
-          page.editSelect.stream().filter(webElement -> webElement
-                  .getAttribute("data-value").equals(percent))
+          page.editSelect.stream().filter(webElement -> webElement.getText().equals(percent))
                   .forEach(WebElement::click);
         }
     }
 
-    public void correctPercentApplied(String value) throws InterruptedException {
+    public void correctPercentApplied(String value, String name) throws InterruptedException {
         Thread.sleep(3000);
         String dwellingValue= coveragesNum.get(0).getText().replace("$","")
                 .replace(".00", "").replace(",",".");
-        double percent= Double.parseDouble(value);
+        double percent= Double.parseDouble(value.replace("%",""));
         double dwellingConvert= Double.parseDouble(dwellingValue);
         double valueApplied= dwellingConvert * percent/100;
 
         String revertDwelling= String.valueOf(valueApplied);
         System.out.println("value applied"+ " "+ revertDwelling);
-        String resultShow= coveragesNum.get(2).getText().replace("$","").
-                replace(".00", ".0").replace(",","");
-        System.out.println("value coverted"+ " "+ resultShow);
-        Assert.assertEquals(revertDwelling,resultShow);
+        String resultShow= "";
 
+        switch (name) {
+            case "Other Structure":
+                resultShow = coveragesNum.get(2).getText().replace("$", "").
+                        replace(".00", ".0").replace(",", "");
+                System.out.println("value coverted" + " " + resultShow);
+                break;
+            case "Personal Property":
+                resultShow = coveragesNum.get(4).getText().replace("$", "").
+                        replace(".00", ".0").replace(",", "");
+                System.out.println("value coverted" + " " + resultShow);
+                break;
+            case "Additional Living":
+                resultShow = coveragesNum.get(6).getText().replace("$", "").
+                        replace(".00", ".0").replace(",", "");
+                System.out.println("value coverted" + " " + resultShow);
+                break;
+        }
+        Assert.assertEquals(revertDwelling, resultShow);
 
     }
 

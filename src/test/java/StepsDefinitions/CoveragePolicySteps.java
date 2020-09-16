@@ -91,12 +91,62 @@ public class CoveragePolicySteps extends TestBase {
         Log.info("verify percent applied is correct");
         p= PropertyHelper.loadData();
         String other= p.getProperty(dropdownValues);
-        coverage.correctPercentApplied(other);
+        coverage.correctPercentApplied(other,"Other Structure");
     }
 
     @Then("select edit Other structure option")
     public void selectEditOtherStructureOption() throws InterruptedException {
         Log.info("select edit other structure");
         coverage.editMenuCoverage("Other structure");
+    }
+
+    @Then("select edit Personal Property option")
+    public void selectEditPersonalPropertyOption() throws InterruptedException {
+        Log.info("select personal property");
+        coverage.editMenuCoverage("Personal Property");
+    }
+
+    @When("enter the personal property percent to apply {string}")
+    public void enterThePersonalPropertyPercentToApply(String personalP) throws IOException, InterruptedException {
+        Log.info("enter personal property value");
+        p= PropertyHelper.loadData();
+        String percentPersonal= p.getProperty(personalP);
+        coverage.enterDwellingValue(percentPersonal);
+
+    }
+
+    @And("verify percent applied is correct personal property {string}")
+    public void verifyPercentAppliedIsCorrectPersonalProperty(String personalP) throws IOException, InterruptedException {
+        Log.info("verify value applied");
+        p= PropertyHelper.loadData();
+        String other= p.getProperty(personalP);
+        coverage.correctPercentApplied(other,"Personal Property");
+
+    }
+
+    @Then("select edit Additional Living option")
+    public void selectEditAdditionalLivingOption() throws InterruptedException {
+        Log.info("select personal property");
+        coverage.editMenuCoverage("Additional Living");
+    }
+
+    @And("verify percent applied is correct additional living {string}")
+    public void verifyPercentAppliedIsCorrectAdditionalLiving(String dropdownValues) throws IOException, InterruptedException {
+        Log.info("verify percent applied");
+        p= PropertyHelper.loadData();
+        String other= p.getProperty(dropdownValues);
+        coverage.correctPercentApplied(other,"Additional Living");
+    }
+
+    @Then("select edit Personal Liability option")
+    public void selectEditPersonalLiabilityOption() throws InterruptedException {
+        Log.info("select personal liability coverage");
+        coverage.editMenuCoverage("Personal liability");
+    }
+
+    @Then("select edit Medical Payment option")
+    public void selectEditMedicalPaymentOption() throws InterruptedException {
+        Log.info("select medical payment coverage");
+        coverage.editMenuCoverage("Medical Payment");
     }
 }

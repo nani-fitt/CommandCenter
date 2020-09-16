@@ -62,5 +62,7 @@ D
 target/cucumber.json,f/f/ffb1e574a891cfb57e02364d4412a78506dc5108
 b
 2src/test/resources/features/BillingSection.feature,8/1/8118a5fbbbf7276cea50c9bc2b471a2b19248999
-h
-8src/test/resources/features/EndorsementCoverages.feature,5/5/5594de35f791d77ba315d7ce54d7756649d58d09
+g
+7src/test/java/StepsDefinitions/CoveragePolicySteps.java,d/1/d16bd6b5a95529ab67586060fd5fc687e93ed2e5
+a
+1src/test/java/ClassBase/CoveragePolicyRecord.java,7/9/79967b69a43fa6b47e156e65a4967ab9aa56ffe5
