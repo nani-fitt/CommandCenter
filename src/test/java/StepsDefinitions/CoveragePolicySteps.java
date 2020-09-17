@@ -33,12 +33,6 @@ public class CoveragePolicySteps extends TestBase {
         coverage.selectCoverageDesired("F. Medical Payments");
     }
 
-    @Then("select edit Dwelling option")
-    public void selectEditDwellingOption() throws InterruptedException {
-        Log.info("Select edit dwelling option");
-        coverage.editMenuCoverage("Dwelling");
-    }
-
     @When("enter the values desired {string}")
     public void enterTheValuesDesired(String coveragesValues) throws IOException, InterruptedException {
         Log.info("Enter the values desired");
@@ -94,18 +88,6 @@ public class CoveragePolicySteps extends TestBase {
         coverage.correctPercentApplied(other,"Other Structure");
     }
 
-    @Then("select edit Other structure option")
-    public void selectEditOtherStructureOption() throws InterruptedException {
-        Log.info("select edit other structure");
-        coverage.editMenuCoverage("Other structure");
-    }
-
-    @Then("select edit Personal Property option")
-    public void selectEditPersonalPropertyOption() throws InterruptedException {
-        Log.info("select personal property");
-        coverage.editMenuCoverage("Personal Property");
-    }
-
     @When("enter the personal property percent to apply {string}")
     public void enterThePersonalPropertyPercentToApply(String personalP) throws IOException, InterruptedException {
         Log.info("enter personal property value");
@@ -124,12 +106,6 @@ public class CoveragePolicySteps extends TestBase {
 
     }
 
-    @Then("select edit Additional Living option")
-    public void selectEditAdditionalLivingOption() throws InterruptedException {
-        Log.info("select personal property");
-        coverage.editMenuCoverage("Additional Living");
-    }
-
     @And("verify percent applied is correct additional living {string}")
     public void verifyPercentAppliedIsCorrectAdditionalLiving(String dropdownValues) throws IOException, InterruptedException {
         Log.info("verify percent applied");
@@ -138,15 +114,18 @@ public class CoveragePolicySteps extends TestBase {
         coverage.correctPercentApplied(other,"Additional Living");
     }
 
-    @Then("select edit Personal Liability option")
-    public void selectEditPersonalLiabilityOption() throws InterruptedException {
-        Log.info("select personal liability coverage");
-        coverage.editMenuCoverage("Personal liability");
+    @And("select Lock for edit coverage {string}")
+    public void selectLockForEditCoverage(String sectionCoverage) throws IOException, InterruptedException {
+        p= PropertyHelper.loadData();
+        String cover= p.getProperty(sectionCoverage);
+        coverage.selectLockButtonCoverage(cover);
+
     }
 
-    @Then("select edit Medical Payment option")
-    public void selectEditMedicalPaymentOption() throws InterruptedException {
-        Log.info("select medical payment coverage");
-        coverage.editMenuCoverage("Medical Payment");
+    @Then("select edit option coverage {string}")
+    public void selectEditOptionCoverage(String coverageName) throws IOException, InterruptedException {
+        p= PropertyHelper.loadData();
+        String coverName= p.getProperty(coverageName);
+        coverage.editMenuCoverage(coverName);
     }
 }

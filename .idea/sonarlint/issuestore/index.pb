@@ -66,3 +66,7 @@ g
 7src/test/java/StepsDefinitions/CoveragePolicySteps.java,d/1/d16bd6b5a95529ab67586060fd5fc687e93ed2e5
 a
 1src/test/java/ClassBase/CoveragePolicyRecord.java,7/9/79967b69a43fa6b47e156e65a4967ab9aa56ffe5
+d
+4src/test/java/StepsDefinitions/EndorsementSteps.java,4/2/420b8f1257350bf10f2c56c797b2c9e5bb5b0901
+\
+,src/test/java/ClassBase/EndorsementPage.java,0/4/04c60f6d6ebcca4272d5b105d1dfd60934c2f842

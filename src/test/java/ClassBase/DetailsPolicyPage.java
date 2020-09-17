@@ -1,5 +1,6 @@
 package ClassBase;
 
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -126,6 +127,9 @@ public class DetailsPolicyPage {
     @FindBy(css = "p[id='BirthdayDate-helper-text']")
     WebElement messageBirthday;
 
+    @FindBy(id = "alert-dialog-description")
+    WebElement alertMessage;
+
 
     public DetailsPolicyPage(WebDriver driver) {
         this.driver = driver;
@@ -153,11 +157,11 @@ public class DetailsPolicyPage {
         List<WebElement> searchListView = driver.findElements(By.xpath("//*[contains(text(),'VIEW POLICY')]"));
         for (int i = 0; i < policyListNumber.size(); i++) {
             if (policyListNumber.get(i).getText().equals(policyNumber)) {
-                if (viewDetailsList.size() >= 1) {
+                if (viewDetailsList.size() >= 1 && blockedByUnderwriter.size()==0) {
                     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
                     wait.until(ExpectedConditions.elementToBeClickable(viewDetailsList.get(i))).click();
                     break;
-                } else if (searchListView.size() >= 1) {
+                } else if (searchListView.size() >= 1 && blockedByUnderwriter.size()==0) {
                     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
                     wait.until(ExpectedConditions.elementToBeClickable(searchListView.get(i))).click();
                     break;
@@ -306,12 +310,30 @@ public class DetailsPolicyPage {
 
     }
 
-    public void selectLockButton() throws InterruptedException {
+    public void selectLockButtonDetails(String option) throws InterruptedException {
         Thread.sleep(5000);
+        String pos= "0";
         if (blockedByUnderwriter.size() == 0) {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
             wait.until(ExpectedConditions.elementToBeClickable(lockOption.get(4))).click();
+        }else
+        {
+            while(alertMessage.getText().contains("This policy is currently locked by")) {
+                driver.findElement(By.xpath("//span[contains(text(),'Cancel')]")).click();
+                driver.navigate().back();
+                Thread.sleep(5000);
+                selectQueue("New");
+                policyFirstOption(pos);
+                expandableListDetails();
+                editMenu(option);
+                int posC= Integer.parseInt(pos);
+                posC= posC+1;
+                pos= String.valueOf(posC);
+            }
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+            wait.until(ExpectedConditions.elementToBeClickable(lockOption.get(4))).click();
         }
+
     }
 
     public void selectMaritalStatus(String status) {
@@ -414,7 +436,7 @@ public class DetailsPolicyPage {
         if (viewDetailsList.size() >= 1) {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
             wait.until(ExpectedConditions.elementToBeClickable(viewDetailsList.get(i))).click();
-        } else if (searchListView.size() >= 1) {
+        } else if (searchListView.size() >= 1  ) {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
             wait.until(ExpectedConditions.elementToBeClickable(searchListView.get(i))).click();
         }

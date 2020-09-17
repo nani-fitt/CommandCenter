@@ -44,7 +44,7 @@
       And   select expandable list for details
       Then  verify primary insurance information are present
       And   select edit information "<editButtonOption>"
-      And   select Lock for edit
+      And   select Lock for edit details "<editButtonOption>"
       When  verify edit insurance screen are displayed
       Then  edit the information desired "<firstName>" "<email>" "<maritalStatus>" "<address>"
       And   click on save button
@@ -64,7 +64,7 @@
       And   select expandable list for details
       Then  verify primary insurance information are present
       And   select edit information "<editButtonOption>"
-      And   select Lock for edit
+      And   select Lock for edit details "<editButtonOption>"
       When  verify edit insurance screen are displayed
       Then  edit the date of birth "<dateBirth>"
       Then  verify the information error message "<message>"
@@ -82,7 +82,7 @@
       And   select expandable list for details
       And   select edit information "<editButtonOption>"
       And   select Add insurance button
-      And   select Lock for edit
+      And   select Lock for edit details "<editButtonOption>"
       When  verify edit insurance screen are displayed
       Then  enter the information desired "<firstName>""<lastName>""<phoneNumber>""<dateBirth>""<city>""<postal>""<state>""<county>""<email>""<maritalStatus>""<address>"
       And   click on save button
@@ -101,15 +101,15 @@
       And   select expandable list for details
       Then  verify primary insurance information are present
       And   select Add additional interest button
-      And   select Lock for edit
+      And   select Lock for edit details "<editButtonOption>"
       When  verify additional interest screen are displayed
       Then  enter additional interest information "<firstName>""<lastName>""<loanNumber>""<institutionName>""<address>""<city>""<postal>"
       And   click on save button interest
       Then  verify status is updated "<status>"
 
       Examples:
-        | username | password |status   |criteria     |firstName    |lastName  |loanNumber|institutionName|address  |city  |postal  |
-        | email    | password |Approved |policyNumber |nameInterest |lastNameIn|loanNumber|institution    |addresInt|cityIn|postalIn|
+        | username | password |status   |criteria     |firstName    |lastName  |loanNumber|institutionName|address  |city  |postal  |editButtonOption|
+        | email    | password |Approved |policyNumber |nameInterest |lastNameIn|loanNumber|institution    |addresInt|cityIn|postalIn|editSelectionA  |
 
    # @EditAdditionalInterest
    # Scenario Outline: Edit additional Interest

@@ -131,10 +131,12 @@ public class DetailsPolicy extends TestBase {
         deta.showEditInsuranceInfo( randomEmail, maritalStat, sddres);
     }
 
-    @And("select Lock for edit")
-    public void selectLockForEdit() throws InterruptedException {
+    @And("select Lock for edit details {string}")
+    public void selectLockForEdit(String editButtonOption) throws InterruptedException, IOException {
         Log.info("Select Lock to Edit");
-        deta.selectLockButton();
+        p= PropertyHelper.loadData();
+        String selection= p.getProperty(editButtonOption);
+        deta.selectLockButtonDetails(selection);
     }
 
     @When("enter the criteria desired {string}")

@@ -2,6 +2,7 @@ package ClassBase;
 
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -249,6 +250,34 @@ public class CoveragePolicyRecord {
         Assert.assertEquals(revertDwelling, resultShow);
 
     }
+
+    public void selectLockButtonCoverage(String option) throws InterruptedException {
+        Thread.sleep(5000);
+        String pos= "0";
+        DetailsPolicyPage details= new DetailsPolicyPage(driver);
+        if (details.blockedByUnderwriter.size() == 0) {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+            wait.until(ExpectedConditions.elementToBeClickable(details.lockOption.get(4))).click();
+        }else
+        {
+            while(details.alertMessage.getText().contains("This policy is currently locked by")) {
+                driver.findElement(By.xpath("//span[contains(text(),'Cancel')]")).click();
+                driver.navigate().back();
+                Thread.sleep(5000);
+                details.selectQueue("New");
+                details.policyFirstOption("0");
+                expandableListCoverage();
+                editMenuCoverage(option);
+                int posC= Integer.parseInt(pos);
+                posC= posC+1;
+                pos= String.valueOf(posC);
+            }
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+            wait.until(ExpectedConditions.elementToBeClickable(details.lockOption.get(4))).click();
+        }
+
+    }
+
 
 
 

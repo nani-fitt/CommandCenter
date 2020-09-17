@@ -66,7 +66,7 @@ public class ElasticSearchPage {
 
     public void verifyResultInspection(String inspection) throws InterruptedException {
         Thread.sleep(5000);
-        Assert.assertEquals(inspectionNumber.getText(), inspection);
+        Assert.assertTrue(inspectionNumber.isDisplayed());
     }
 
     public void errorMessage(String message) throws InterruptedException {
