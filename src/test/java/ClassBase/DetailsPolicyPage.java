@@ -316,23 +316,26 @@ public class DetailsPolicyPage {
         if (blockedByUnderwriter.size() == 0) {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
             wait.until(ExpectedConditions.elementToBeClickable(lockOption.get(4))).click();
-        }else
-        {
-            while(alertMessage.getText().contains("This policy is currently locked by")) {
-                driver.findElement(By.xpath("//span[contains(text(),'Cancel')]")).click();
-                driver.navigate().back();
-                Thread.sleep(5000);
-                selectQueue("New");
-                policyFirstOption(pos);
-                expandableListDetails();
-                editMenu(option);
-                int posC= Integer.parseInt(pos);
-                posC= posC+1;
-                pos= String.valueOf(posC);
+        }else if (blockedByUnderwriter.size() == 1) {
+            if (driver.findElements(By.xpath("//span[contains(text(),'Cancel')]")).size() >= 1) {
+                while (alertMessage.getText().contains("This policy is currently locked by")) {
+                    driver.findElement(By.xpath("//span[contains(text(),'Cancel')]")).click();
+                    driver.navigate().back();
+                    Thread.sleep(5000);
+                    selectQueue("New");
+                    policyFirstOption(pos);
+                    expandableListDetails();
+                    editMenu(option);
+                    int posC = Integer.parseInt(pos);
+                    posC = posC + 1;
+                    pos = String.valueOf(posC);
+                }
+
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+                wait.until(ExpectedConditions.elementToBeClickable(lockOption.get(4))).click();
             }
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-            wait.until(ExpectedConditions.elementToBeClickable(lockOption.get(4))).click();
         }
+
 
     }
 

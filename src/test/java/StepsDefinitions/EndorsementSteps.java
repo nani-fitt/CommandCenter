@@ -2,15 +2,46 @@ package StepsDefinitions;
 
 import ClassBase.EndorsementPage;
 import Utilities.Log;
+import Utilities.PropertyHelper;
 import Utilities.TestBase;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import java.io.IOException;
+import java.util.Properties;
 
 public class EndorsementSteps extends TestBase {
 
     EndorsementPage endorsement= new EndorsementPage(driver);
+    Properties p;
 
     @Then("verify endorsement desired is displayed {string}")
-    public void verifyEndorsementDesiredIsDisplayed(String nameEndorsement) {
+    public void verifyEndorsementDesiredIsDisplayed(String endorsementName) throws IOException, InterruptedException {
         Log.info("Verify endorsement is displayed");
+        p= PropertyHelper.loadData();
+        String endorNa= p.getProperty(endorsementName);
+        endorsement.verifyEndorsement(endorNa);
+    }
+
+    @And("select Lock for edit endorsement {string}")
+    public void selectLockForEditEndorsement(String endorsementName) throws IOException, InterruptedException {
+        Log.info("Verify endorsement is displayed");
+        p= PropertyHelper.loadData();
+        String endorNa= p.getProperty(endorsementName);
+        endorsement.selectLockButtonEndorsement(endorNa);
+    }
+
+    @When("enter the values desired endorsement {string}")
+    public void enterTheValuesDesiredEndorsement(String endorsementValues) {
+
+    }
+
+    @Then("select edit option endorsement{string}")
+    public void selectEditOptionEndorsement(String endorsementName) throws IOException, InterruptedException {
+        Log.info("select edit endorsement");
+        p= PropertyHelper.loadData();
+        String endorNa= p.getProperty(endorsementName);
+        endorsement.editMenuEndorsement(endorNa);
     }
 }
