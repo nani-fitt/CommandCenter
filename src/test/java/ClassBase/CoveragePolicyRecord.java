@@ -83,7 +83,7 @@ public class CoveragePolicyRecord {
                 Thread.sleep(3000);
                 wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(3))).click();
                 break;
-            case "Other structure": {
+            case "Other Structure": {
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(2))).click();
                 Thread.sleep(3000);
                 Actions act = new Actions(driver);
@@ -142,8 +142,8 @@ public class CoveragePolicyRecord {
 
     public void clickOnSaveDwelling() throws InterruptedException {
         Thread.sleep(5000);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-        wait.until(ExpectedConditions.elementToBeClickable(saveDwelling)).click();
+        Actions act= new Actions(driver);
+        act.moveToElement(saveDwelling).click(saveDwelling).build().perform();
     }
 
     public void clickOnCancelDwelling() throws InterruptedException {

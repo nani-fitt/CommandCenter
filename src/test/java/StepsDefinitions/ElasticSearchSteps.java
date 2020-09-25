@@ -5,6 +5,7 @@ import ClassBase.ElasticSearchPage;
 import Utilities.Log;
 import Utilities.PropertyHelper;
 import Utilities.TestBase;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -75,4 +76,5 @@ public class ElasticSearchSteps extends TestBase {
          search.verifyAllResult();
          validateWindows();
     }
+
 }

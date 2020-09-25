@@ -60,8 +60,6 @@ U
 %target/test-classes/extent-config.xml,3/3/332a7fba89515ed106946f9770d8acf1aba7c0db
 D
 target/cucumber.json,f/f/ffb1e574a891cfb57e02364d4412a78506dc5108
-b
-2src/test/resources/features/BillingSection.feature,8/1/8118a5fbbbf7276cea50c9bc2b471a2b19248999
 g
 7src/test/java/StepsDefinitions/CoveragePolicySteps.java,d/1/d16bd6b5a95529ab67586060fd5fc687e93ed2e5
 a

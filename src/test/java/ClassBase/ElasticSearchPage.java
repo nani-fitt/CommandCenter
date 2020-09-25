@@ -20,7 +20,7 @@ public class ElasticSearchPage {
     @FindBy(id= "inspection")
     WebElement selectInspection;
 
-    @FindBy(xpath= "//span[contains(text(),'d8ce1b5b')]")
+    @FindBy(xpath= "//span[contains(text(),'f8a460708d49')]")
     WebElement inspectionNumber;
 
     @FindBy(css= "div[class='alert alert-light text-center']")

@@ -27,7 +27,7 @@
       And   select expandable list for details
       Then  verify primary insurance information are present
       And   select edit information "<editButtonOption>"
-      And   select Lock for edit
+      And   select Lock for edit details "<editButtonOption>"
       When  verify edit insurance screen are displayed
       Then  verify Save button is disable
 

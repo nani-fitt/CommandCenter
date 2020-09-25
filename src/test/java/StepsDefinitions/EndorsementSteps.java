@@ -33,7 +33,11 @@ public class EndorsementSteps extends TestBase {
     }
 
     @When("enter the values desired endorsement {string}")
-    public void enterTheValuesDesiredEndorsement(String endorsementValues) {
+    public void enterTheValuesDesiredEndorsement(String endorsementValues) throws IOException, InterruptedException {
+        Log.info("enter the values desired");
+        p= PropertyHelper.loadData();
+        String animal= p.getProperty(endorsementValues);
+        endorsement.enterAnimalLiabilityValue(animal);
 
     }
 
@@ -43,5 +47,32 @@ public class EndorsementSteps extends TestBase {
         p= PropertyHelper.loadData();
         String endorNa= p.getProperty(endorsementName);
         endorsement.editMenuEndorsement(endorNa);
+    }
+
+    @And("click on save endorsement button")
+    public void clickOnSaveEndorsementButton() throws InterruptedException {
+        Log.info("select save endorsement");
+        endorsement.clickOnSaveEndorsement();
+    }
+
+    @And("select remove endorsement {string}")
+    public void selectLockForEditAndRemoveEndorsement(String endorsementName) throws IOException, InterruptedException {
+        Log.info("select remove endorsement");
+        p= PropertyHelper.loadData();
+        String endorNa= p.getProperty(endorsementName);
+        endorsement.editRemoveEndorsement(endorNa);
+    }
+
+    @When("click on issue button")
+    public void clickOnIssueButton() throws InterruptedException {
+        Log.info("click on issue button");
+        endorsement.clickOnIssueButton();
+    }
+
+    @Then("verify the issue is created")
+    public void verifyTheIssueIsCreated() throws InterruptedException {
+        Log.info("verify issue is created");
+        endorsement.versionIsssue();
+
     }
 }

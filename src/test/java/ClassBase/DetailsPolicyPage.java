@@ -2,10 +2,7 @@ package ClassBase;
 
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -422,7 +419,10 @@ public class DetailsPolicyPage {
     }
 
     public void newInformationCreate(String status) throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(9000);
+        Actions act= new Actions(driver);
+        JavascriptExecutor js = ((JavascriptExecutor) driver);
+        js.executeScript("arguments[0].scrollIntoView(true);", newChangePolicy.get(0));
         for (WebElement webElement : newChangePolicy) {
 
             if (webElement.getText().equals(status)) {

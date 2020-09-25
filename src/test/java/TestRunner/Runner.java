@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 @CucumberOptions(features = "src/test/resources/features", glue = { "StepsDefinitions" }
         , plugin = {"html:target/site/cucumber-pretty","json:target/cucumber.json"}
-        , tags = {"@PolicyDetails"}) // or
+        , tags = {"@DeleteEndorsement"}) // or
 
 
 //"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
