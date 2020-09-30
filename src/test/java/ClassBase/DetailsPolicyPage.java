@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class DetailsPolicyPage {
@@ -127,6 +130,9 @@ public class DetailsPolicyPage {
     @FindBy(id = "alert-dialog-description")
     WebElement alertMessage;
 
+    @FindBy(id = "policyNumber")
+    WebElement policyNu;
+
 
     public DetailsPolicyPage(WebDriver driver) {
         this.driver = driver;
@@ -169,8 +175,7 @@ public class DetailsPolicyPage {
 
     public void detailsSection() throws InterruptedException {
         Thread.sleep(5000);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-        wait.until(ExpectedConditions.textToBePresentInElement(detailOption, "DETAILS"));
+        Assert.assertTrue(policyNu.isDisplayed());
     }
 
     public void coverageSection() throws InterruptedException {
@@ -201,7 +206,9 @@ public class DetailsPolicyPage {
     public void editMenu(String valueSelect) throws InterruptedException {
         Thread.sleep(5000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+        Actions act= new Actions(driver);
         if (valueSelect.equals("Insurance Information")) {
+            act.moveToElement(propertyMenu.get(1)).build().perform();
             wait.until(ExpectedConditions.elementToBeClickable(propertyMenu.get(1))).click();
             Thread.sleep(3000);
             wait.until(ExpectedConditions.elementToBeClickable(editSelect.get(3))).click();
@@ -210,7 +217,6 @@ public class DetailsPolicyPage {
             int posE= editSelect.size()-1;
             wait.until(ExpectedConditions.elementToBeClickable(propertyMenu.get(pos))).click();
             Thread.sleep(3000);
-            Actions act= new Actions(driver);
             act.moveToElement(editSelect.get(posE)).doubleClick(editSelect.get(posE)).build().perform();
 
         }
@@ -497,19 +503,30 @@ public class DetailsPolicyPage {
         birthday.click();
         Actions act = new Actions(driver);
         String valueEmail = birthday.getAttribute("value");
-        while (valueEmail.length() >= 1) {
-            act.doubleClick(birthday).build().perform();
+        act.doubleClick(birthday).build().perform();
+        birthday.sendKeys(Keys.DELETE);
+       /* while (valueEmail.length() >= 1) {
+
             birthday.sendKeys(Keys.DELETE);
             valueEmail = email.getAttribute("value");
-        }
+        }*/
         birthday.sendKeys(dateBirth);
         Thread.sleep(3000);
     }
 
     public void errorMessage(String message) throws InterruptedException {
         Thread.sleep(3000);
+        Calendar fecha= new GregorianCalendar();
+        int ano= fecha.get(Calendar.YEAR);
+        int year= ano - 18;
+        int mes= fecha.get(Calendar.MONTH);
+        int mes1= mes +1;
+        int date= fecha.get(Calendar.DAY_OF_MONTH);
+        String actualDate= " "+ mes1 + "/"+ date + "/" + year;
+        System.out.println("actualDate = " + actualDate);
+        String mess= message.concat(actualDate);
         if (messageBirthday.isDisplayed()) {
-            Assert.assertEquals(messageBirthday.getText(), message);
+            Assert.assertEquals(messageBirthday.getText(), mess);
         }
     }
 

@@ -60,7 +60,7 @@ public class DetailsPolicy extends TestBase {
     @And("select expandable list for details")
     public void selectExpandableListForDetails() throws InterruptedException {
         Log.info("Select expandable list");
-        deta.expandableListDetails();
+     //   deta.expandableListDetails();
     }
 
     @Then("verify primary insurance information are present")
@@ -153,7 +153,6 @@ public class DetailsPolicy extends TestBase {
         p= PropertyHelper.loadData();
         String mess= p.getProperty(message);
        deta.errorMessage(mess);
-        validateWindows();
     }
 
     @And("verify Pending Change status is displayed")

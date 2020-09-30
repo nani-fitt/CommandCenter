@@ -11,7 +11,7 @@
       When  enter the criteria desired "<criteria>"
       And   select the policy desired "<criteria>"
       Then  verify Details section is displayed
-      And   select expandable list for details
+    #  And   select expandable list for details
       Then  verify insurance information are displayed "<criteria>"
 
       Examples:
@@ -24,7 +24,7 @@
       When  select the Queue desired "<nameQueue>"
       And   select first policy displayed "<index>"
       Then  verify Details section is displayed
-      And   select expandable list for details
+    #  And   select expandable list for details
       Then  verify primary insurance information are present
       And   select edit information "<editButtonOption>"
       And   select Lock for edit details "<editButtonOption>"
@@ -41,7 +41,7 @@
       When  select the Queue desired "<nameQueue>"
       And   select first policy displayed "<index>"
       Then  verify Details section is displayed
-      And   select expandable list for details
+    #  And   select expandable list for details
       Then  verify primary insurance information are present
       And   select edit information "<editButtonOption>"
       And   select Lock for edit details "<editButtonOption>"
@@ -61,7 +61,7 @@
       When  select the Queue desired "<nameQueue>"
       And   select first policy displayed "<index>"
       Then  verify Details section is displayed
-      And   select expandable list for details
+    #  And   select expandable list for details
       Then  verify primary insurance information are present
       And   select edit information "<editButtonOption>"
       And   select Lock for edit details "<editButtonOption>"
@@ -79,7 +79,7 @@
       When  select the Queue desired "<nameQueue>"
       And   select first policy displayed "<index>"
       Then  verify Details section is displayed
-      And   select expandable list for details
+    #  And   select expandable list for details
       And   select edit information "<editButtonOption>"
       And   select Add insurance button
       And   select Lock for edit details "<editButtonOption>"
@@ -98,7 +98,7 @@
       When  enter the criteria desired "<criteria>"
       And   select the policy desired "<criteria>"
       Then  verify Details section is displayed
-      And   select expandable list for details
+    #  And   select expandable list for details
       Then  verify primary insurance information are present
       And   select Add additional interest button
       And   select Lock for edit details "<editButtonOption>"

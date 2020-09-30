@@ -63,7 +63,7 @@ public class CoveragePolicyRecord {
     public void expandableListCoverage() throws InterruptedException {
         Thread.sleep(5000);
         DetailsPolicyPage page= new DetailsPolicyPage(driver);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(80));
         wait.until(ExpectedConditions.elementToBeClickable(page.underwritingQueuePlus.get(2))).click();
     }
 
@@ -79,19 +79,11 @@ public class CoveragePolicyRecord {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
         switch (valueSelect) {
             case "Dwelling":
-                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(1))).click();
-                Thread.sleep(3000);
-                wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(3))).click();
-                break;
-            case "Other Structure": {
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(2))).click();
                 Thread.sleep(3000);
-                Actions act = new Actions(driver);
-                act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(4)).build().perform();
-
+                wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(4))).click();
                 break;
-            }
-            case "Personal Property": {
+            case "Other Structure": {
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(3))).click();
                 Thread.sleep(3000);
                 Actions act = new Actions(driver);
@@ -99,7 +91,7 @@ public class CoveragePolicyRecord {
 
                 break;
             }
-            case "Additional Living": {
+            case "Personal Property": {
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(4))).click();
                 Thread.sleep(3000);
                 Actions act = new Actions(driver);
@@ -107,7 +99,7 @@ public class CoveragePolicyRecord {
 
                 break;
             }
-            case "Personal liability": {
+            case "Additional Living": {
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(5))).click();
                 Thread.sleep(3000);
                 Actions act = new Actions(driver);
@@ -115,11 +107,19 @@ public class CoveragePolicyRecord {
 
                 break;
             }
-            case "Medical Payment": {
+            case "Personal liability": {
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(6))).click();
                 Thread.sleep(3000);
                 Actions act = new Actions(driver);
                 act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(8)).build().perform();
+
+                break;
+            }
+            case "Medical Payment": {
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(7))).click();
+                Thread.sleep(3000);
+                Actions act = new Actions(driver);
+                act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(9)).build().perform();
 
                 break;
             }
