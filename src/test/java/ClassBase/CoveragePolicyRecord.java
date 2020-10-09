@@ -77,48 +77,50 @@ public class CoveragePolicyRecord {
         Thread.sleep(5000);
         DetailsPolicyPage page = new DetailsPolicyPage(driver);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+        Actions act= new Actions(driver);
         switch (valueSelect) {
             case "Dwelling":
+                act.moveToElement(page.propertyMenu.get(2)).build().perform();
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(2))).click();
                 Thread.sleep(3000);
                 wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(4))).click();
                 break;
             case "Other Structure": {
+                act.moveToElement(page.propertyMenu.get(3)).build().perform();
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(3))).click();
                 Thread.sleep(3000);
-                Actions act = new Actions(driver);
                 act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(5)).build().perform();
 
                 break;
             }
             case "Personal Property": {
+                act.moveToElement(page.propertyMenu.get(4)).build().perform();
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(4))).click();
                 Thread.sleep(3000);
-                Actions act = new Actions(driver);
                 act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(6)).build().perform();
 
                 break;
             }
             case "Additional Living": {
+                act.moveToElement(page.propertyMenu.get(5)).build().perform();
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(5))).click();
                 Thread.sleep(3000);
-                Actions act = new Actions(driver);
                 act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(7)).build().perform();
 
                 break;
             }
             case "Personal liability": {
+                act.moveToElement(page.propertyMenu.get(6)).build().perform();
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(6))).click();
                 Thread.sleep(3000);
-                Actions act = new Actions(driver);
                 act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(8)).build().perform();
 
                 break;
             }
             case "Medical Payment": {
+                act.moveToElement(page.propertyMenu.get(7)).build().perform();
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(7))).click();
                 Thread.sleep(3000);
-                Actions act = new Actions(driver);
                 act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(9)).build().perform();
 
                 break;
@@ -162,37 +164,37 @@ public class CoveragePolicyRecord {
     public void verifyValuesChangesPP(String dwelling) throws InterruptedException {
          Thread.sleep(5000);
          double dwellingInt= Double.parseDouble(dwelling);
-         double percentProperty= Double.parseDouble(percentApplied.get(2).getText().replace("%",""));
+         double percentProperty= Double.parseDouble(percentApplied.get(8).getText().replace("%",""));
          double personalPropertyValue= dwellingInt * (percentProperty/100);
          String valuePP= String.valueOf(personalPropertyValue);
          System.out.println("value personal property calculate"+ " "+ valuePP);
-         String personalRealValue= coveragesNum.get(4).getText().replace("$","").
+         String personalRealValue= coveragesNum.get(10).getText().replace("$","").
                 replace(".00", ".0").replace(",","");
          System.out.println("value personal property real"+ " "+ personalRealValue);
           Assert.assertEquals(valuePP,personalRealValue);
 
          Thread.sleep(1000);
          Actions act= new Actions(driver);
-         act.moveToElement(percentApplied.get(3)).build().perform();
-        double additionalPercent= Double.parseDouble(percentApplied.get(3).getText().replace("%",""));
+         act.moveToElement(percentApplied.get(9)).build().perform();
+        double additionalPercent= Double.parseDouble(percentApplied.get(9).getText().replace("%",""));
         double additionalValue= dwellingInt * (additionalPercent/100);
         String valueALE= String.valueOf(additionalValue);
         System.out.println("value additional living expense"+ " "+ valueALE);
-        String additionalRealValue= coveragesNum.get(6).getText().replace("$","").
+        String additionalRealValue= coveragesNum.get(12).getText().replace("$","").
                 replace(".00", ".0").replace(",","");
         System.out.println("value additional living expense"+ " "+ additionalRealValue);
         Assert.assertEquals(valueALE,additionalRealValue);
 
-        if (percentApplied.get(1).getText().equals("0%"))
+        if (percentApplied.get(7).getText().equals("0%"))
         {
-            Assert.assertEquals("$0.00", coveragesNum.get(2).getText());
+            Assert.assertEquals("$0.00", coveragesNum.get(8).getText());
         }else
         {
-            double otherStructure= Double.parseDouble(percentApplied.get(1).getText().replace("%",""));
+            double otherStructure= Double.parseDouble(percentApplied.get(7).getText().replace("%",""));
             double otherStructureValue= dwellingInt * (otherStructure/100);
             String valueOther= String.valueOf(otherStructureValue);
             System.out.println("value other structure"+ " "+ valueALE);
-            String otherRealValue= coveragesNum.get(2).getText().replace("$","").
+            String otherRealValue= coveragesNum.get(8).getText().replace("$","").
                     replace(".00", ".0").replace(",","");
             System.out.println("value other structure"+ " "+ otherRealValue);
             Assert.assertEquals(valueOther,otherRealValue);
@@ -220,7 +222,7 @@ public class CoveragePolicyRecord {
 
     public void correctPercentApplied(String value, String name) throws InterruptedException {
         Thread.sleep(3000);
-        String dwellingValue= coveragesNum.get(0).getText().replace("$","")
+        String dwellingValue= coveragesNum.get(6).getText().replace("$","")
                 .replace(".00", "").replace(",",".");
         double percent= Double.parseDouble(value.replace("%",""));
         double dwellingConvert= Double.parseDouble(dwellingValue);
@@ -232,17 +234,17 @@ public class CoveragePolicyRecord {
 
         switch (name) {
             case "Other Structure":
-                resultShow = coveragesNum.get(2).getText().replace("$", "").
+                resultShow = coveragesNum.get(8).getText().replace("$", "").
                         replace(".00", ".0").replace(",", "");
                 System.out.println("value coverted" + " " + resultShow);
                 break;
             case "Personal Property":
-                resultShow = coveragesNum.get(4).getText().replace("$", "").
+                resultShow = coveragesNum.get(10).getText().replace("$", "").
                         replace(".00", ".0").replace(",", "");
                 System.out.println("value coverted" + " " + resultShow);
                 break;
             case "Additional Living":
-                resultShow = coveragesNum.get(6).getText().replace("$", "").
+                resultShow = coveragesNum.get(12).getText().replace("$", "").
                         replace(".00", ".0").replace(",", "");
                 System.out.println("value coverted" + " " + resultShow);
                 break;

@@ -65,6 +65,7 @@ Feature: Verify coverage section
     And   verify Personal Property and Additional Living values "<coveragesValues>"
     And   verify sticky bar is displayed
 
+
     Examples:
       | username | password |criteria     |coveragesValues|status  |coverageName|
       | email    | password |policyNumberC|coveragesGood  |Approved|nameCoverD  |
@@ -83,6 +84,7 @@ Feature: Verify coverage section
     Then  verify status is updated "<status>"
     And   verify percent applied is correct "<dropdownValues>"
     And   verify sticky bar is displayed
+
 
     Examples:
       | username | password |criteria     |dropdownValues|status  |coverageName|
@@ -137,6 +139,7 @@ Feature: Verify coverage section
     And   verify percent applied is correct personal property "<personalP>"
     And   verify sticky bar is displayed
 
+
     Examples:
       | username | password |criteria     |personalP  |status  |coverageName|
       | email    | password |policyNumberC|percentPerC|Approved|nameCoverPP |
@@ -156,6 +159,7 @@ Feature: Verify coverage section
     And   verify percent applied is correct additional living "<dropdownValues>"
     And   verify sticky bar is displayed
 
+
     Examples:
       | username | password |criteria     |dropdownValues|status  |coverageName|
       | email    | password |policyNumberC|percentSelectA|Approved|nameCoverAL |
@@ -174,6 +178,7 @@ Feature: Verify coverage section
     Then  verify status is updated "<status>"
     And   verify sticky bar is displayed
 
+
     Examples:
       | username | password |criteria     |dropdownValues|status  |coverageName|
       | email    | password |policyNumberC|liability     |Approved|nameCoverPL |
@@ -191,6 +196,7 @@ Feature: Verify coverage section
     And   click on save coverage button
     Then  verify status is updated "<status>"
     And   verify sticky bar is displayed
+
 
     Examples:
       | username | password |criteria     |dropdownValues|status  |coverageName|

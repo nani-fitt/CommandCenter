@@ -5,7 +5,6 @@ import ClassBase.ElasticSearchPage;
 import Utilities.Log;
 import Utilities.PropertyHelper;
 import Utilities.TestBase;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -49,7 +48,7 @@ public class ElasticSearchSteps extends TestBase {
         p= PropertyHelper.loadData();
         String policy= p.getProperty(criteria);
         search.verifyResultPolicy(policy);
-        validateWindows();
+
     }
 
     @Then("verify the claims displayed is correct {string}")
@@ -58,7 +57,7 @@ public class ElasticSearchSteps extends TestBase {
         p= PropertyHelper.loadData();
         String claims= p.getProperty(criteria);
         search.verifyResultClaims(claims);
-        validateWindows();
+
     }
 
     @Then("verify the inspection displayed is correct {string}")
@@ -74,7 +73,7 @@ public class ElasticSearchSteps extends TestBase {
     public void verifyAllTheOptionAreDisplayedCorrectly() throws InterruptedException {
         Log.info("Verify all the option are displayed");
          search.verifyAllResult();
-         validateWindows();
+
     }
 
 }

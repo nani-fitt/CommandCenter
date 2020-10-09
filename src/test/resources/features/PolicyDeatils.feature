@@ -50,6 +50,9 @@
       And   click on save button
       Then  verify the information is updated "<email>" "<maritalStatus>" "<address>"
       Then  verify status is updated "<status>"
+      And   verify sticky bar is displayed
+      When  click on issue button
+      Then  verify the issue is created
 
       Examples:
         | username | password |nameQueue  |index        |editButtonOption|firstName  |email|maritalStatus|address|status  |
@@ -58,8 +61,8 @@
     @EditInsuranceInfoIncorrectDateBirth
     Scenario Outline: Edit primary insurance with incorrect date of birth
       Given user Sign In with correct credentials "<username>" and "<password>"
-      When  select the Queue desired "<nameQueue>"
-      And   select first policy displayed "<index>"
+      When  enter the criteria desired "<criteria>"
+      And   select the policy desired "<criteria>"
       Then  verify Details section is displayed
     #  And   select expandable list for details
       Then  verify primary insurance information are present
@@ -70,8 +73,8 @@
       Then  verify the information error message "<message>"
 
       Examples:
-        | username | password |nameQueue |index         |editButtonOption|dateBirth     |message      |
-        | email    | password |queu      |policyIndexSe2|editSelection   |incorrectBirth|errorMessageB|
+        | username | password |criteria          |editButtonOption|dateBirth     |message      |
+        | email    | password |policyNumberChange|editSelection   |incorrectBirth|errorMessageB|
 
     @AddSecondaryInsurance
     Scenario Outline: Add secondary insurance
@@ -80,23 +83,25 @@
       And   select first policy displayed "<index>"
       Then  verify Details section is displayed
     #  And   select expandable list for details
-      And   select edit information "<editButtonOption>"
       And   select Add insurance button
       And   select Lock for edit details "<editButtonOption>"
       When  verify edit insurance screen are displayed
       Then  enter the information desired "<firstName>""<lastName>""<phoneNumber>""<dateBirth>""<city>""<postal>""<state>""<county>""<email>""<maritalStatus>""<address>"
-      And   click on save button
+      And   click on save add insurance button
       Then  verify status is updated "<status>"
+      And   verify sticky bar is displayed
+      When  click on issue button
+      Then  verify the issue is created
 
       Examples:
-        | username | password |nameQueue |index          |editButtonOption|firstName|lastName|phoneNumber|dateBirth |city|postal|state|county|email    |maritalStatus   |address    |status             |
-        | email    | password |queu      |policyIndexSe2 |editSelection   |nameInsu |lastName|phone      |dateBirth |city|postal|state|county|emailInsu|maritalStatus   |addressInsu|statusNewInsurance |
+        | username | password |nameQueue |index         |editButtonOption|firstName|lastName|phoneNumber|dateBirth |city|postal|state|county|email    |maritalStatus   |address    |status             |
+        | email    | password |queu      |policyIndexSe |editSelection   |nameInsu |lastName|phone      |dateBirth |city|postal|state|county|emailInsu|maritalStatus   |addressInsu|statusNewInsurance |
 
     @AddAdditionalInterest
     Scenario Outline: Add additional Interest
       Given user Sign In with correct credentials "<username>" and "<password>"
-      When  enter the criteria desired "<criteria>"
-      And   select the policy desired "<criteria>"
+      When  select the Queue desired "<nameQueue>"
+      And   select first policy displayed "<index>"
       Then  verify Details section is displayed
     #  And   select expandable list for details
       Then  verify primary insurance information are present
@@ -106,10 +111,13 @@
       Then  enter additional interest information "<firstName>""<lastName>""<loanNumber>""<institutionName>""<address>""<city>""<postal>"
       And   click on save button interest
       Then  verify status is updated "<status>"
+      And   verify sticky bar is displayed
+      When  click on issue button
+      Then  verify the issue is created
 
       Examples:
-        | username | password |status   |criteria     |firstName    |lastName  |loanNumber|institutionName|address  |city  |postal  |editButtonOption|
-        | email    | password |Approved |policyNumber |nameInterest |lastNameIn|loanNumber|institution    |addresInt|cityIn|postalIn|editSelectionA  |
+        | username | password |status   |nameQueue |index          |firstName |lastName  |loanNumber|institutionName|address  |city  |postal  |editButtonOption|
+        | email    | password |Approved |queu      |policyIndexSe1 |nameInsu  |lastNameIn|loanNumber|institution    |addresInt|cityIn|postalIn|editSelectionA  |
 
    # @EditAdditionalInterest
    # Scenario Outline: Edit additional Interest

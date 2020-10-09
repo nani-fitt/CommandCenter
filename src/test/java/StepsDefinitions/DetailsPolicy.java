@@ -161,7 +161,7 @@ public class DetailsPolicy extends TestBase {
         p= PropertyHelper.loadData();
         String status= p.getProperty("statusPending");
         deta.pendingChangeStatus(status);
-        validateWindows();
+
     }
 
     @And("select Add insurance button")
@@ -280,5 +280,11 @@ public class DetailsPolicy extends TestBase {
     public void verifyPersonalPropertyAndAdditionalLivingValues() {
         Log.info("verify personal property and additional living values change");
 
+    }
+
+    @And("click on save add insurance button")
+    public void clickOnSaveAddInsuranceButton() throws InterruptedException {
+        Log.info("Click on add insurance information button");
+        deta.addInsuranceInfoSave();
     }
 }

@@ -8,9 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -78,6 +76,9 @@ public class DetailsPolicyPage {
 
     @FindBy(id = "saveInsuredButton")
     WebElement buttonSave;
+
+    @FindBy(id = "addInsuredButton")
+    List<WebElement>  buttonAddI;
 
     @FindBy(id = "cancelInsuredButton")
     WebElement buttonCancel;
@@ -205,8 +206,9 @@ public class DetailsPolicyPage {
 
     public void editMenu(String valueSelect) throws InterruptedException {
         Thread.sleep(5000);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(50));
         Actions act= new Actions(driver);
+
         if (valueSelect.equals("Insurance Information")) {
             act.moveToElement(propertyMenu.get(1)).build().perform();
             wait.until(ExpectedConditions.elementToBeClickable(propertyMenu.get(1))).click();
@@ -215,25 +217,31 @@ public class DetailsPolicyPage {
         } else if (valueSelect.equals("Additional Interest")) {
             int pos= propertyMenu.size()-1;
             int posE= editSelect.size()-1;
+            act.moveToElement(propertyMenu.get(pos)).build().perform();
             wait.until(ExpectedConditions.elementToBeClickable(propertyMenu.get(pos))).click();
             Thread.sleep(3000);
             act.moveToElement(editSelect.get(posE)).doubleClick(editSelect.get(posE)).build().perform();
 
         }
 
-
     }
 
     public void addInsuranceInfo() throws InterruptedException {
         Thread.sleep(5000);
         Actions act = new Actions(driver);
-        act.moveToElement(addInsurance).doubleClick(addInsurance).build().perform();
+        act.moveToElement(buttonAddI.get(0)).click(buttonAddI.get(0)).build().perform();
+    }
+
+    public void addInsuranceInfoSave() throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act = new Actions(driver);
+        act.moveToElement(buttonAddI.get(1)).click(buttonAddI.get(1)).build().perform();
     }
 
     public void buttonSaveInsuranceInfo() throws InterruptedException {
-        Thread.sleep(5000);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-        wait.until(ExpectedConditions.elementToBeClickable(buttonSave)).click();
+        Thread.sleep(4000);
+        Actions act= new Actions(driver);
+        act.moveToElement(buttonSave).click(buttonSave).build().perform();
         Thread.sleep(5000);
     }
 
