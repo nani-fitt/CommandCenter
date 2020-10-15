@@ -26,8 +26,19 @@ public class ServicesHook {
         FileInputStream file= new FileInputStream("./src/properties/browser.properties");
         prop.load(file);
         String browsers= prop.getProperty("browser");
-        String env= prop.getProperty("url");
-        testBase.selectBrowser(browsers, env);
+        String env= prop.getProperty("Environment");
+
+        if(env.equals("demo"))
+        {
+            String urlD= prop.getProperty("demo");
+            testBase.selectBrowser(browsers, urlD);
+        }else
+        {
+            String url= prop.getProperty("url");
+            testBase.selectBrowser(browsers, url);
+        }
+
+
     }
 
     @After()

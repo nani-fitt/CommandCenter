@@ -26,6 +26,8 @@ public class ElasticSearchPage {
     @FindBy(css= "div[class='alert alert-light text-center']")
     WebElement errorMessage;
 
+
+
     public ElasticSearchPage (WebDriver driver)
     {
         this.driver= driver;

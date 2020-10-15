@@ -7,6 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -84,13 +86,12 @@ public class ActivityLogPage {
     public void verifyCreation()
     {
         System.out.println("verify result activity"+ activityCreation.get(0).getText());
-
+        String [] text= activityCreation.get(0).getText().split(" ");
+        System.out.println("verify result activity convert"+ text[1]);
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss aa");
         Date date4 = new Date();
-        System.out.println(dateFormat.format(date4));
-
-
+        String [] compare= dateFormat.format(date4).split(" ");
+        System.out.println("verify real value"+ compare[0]);
+        Assert.assertEquals(text[1],compare[0]);
     }
-
-
 }

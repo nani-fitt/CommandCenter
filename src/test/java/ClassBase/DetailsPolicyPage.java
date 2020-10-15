@@ -476,7 +476,7 @@ public class DetailsPolicyPage {
     }
 
     public void addAdditionalInterest(String name, String lastnam, String loanN, String instname, String addres, String city, String postal) throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(7000);
         Actions act = new Actions(driver);
         act.click(firstName).build().perform();
         firstName.sendKeys(name);

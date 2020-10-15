@@ -68,3 +68,7 @@ d
 4src/test/java/StepsDefinitions/EndorsementSteps.java,4/2/420b8f1257350bf10f2c56c797b2c9e5bb5b0901
 \
 ,src/test/java/ClassBase/EndorsementPage.java,0/4/04c60f6d6ebcca4272d5b105d1dfd60934c2f842
+d
+4src/test/java/StepsDefinitions/ActivityLogSteps.java,1/d/1d3dad8f9c461c170a2fb00919a0a8871a5288f1
+\
+,src/test/java/ClassBase/ActivityLogPage.java,e/e/ee605afeae5174f95eb0e8dd1f1059275cda67f8

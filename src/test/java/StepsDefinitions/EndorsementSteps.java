@@ -40,15 +40,6 @@ public class EndorsementSteps extends TestBase {
         endorsement.enterAnimalLiabilityValue(animal);
 
     }
-
-    @Then("select edit option endorsement{string}")
-    public void selectEditOptionEndorsement(String endorsementName) throws IOException, InterruptedException {
-        Log.info("select edit endorsement");
-        p= PropertyHelper.loadData();
-        String endorNa= p.getProperty(endorsementName);
-        endorsement.editMenuEndorsement(endorNa);
-    }
-
     @And("click on save endorsement button")
     public void clickOnSaveEndorsementButton() throws InterruptedException {
         Log.info("select save endorsement");
@@ -74,5 +65,40 @@ public class EndorsementSteps extends TestBase {
         Log.info("verify issue is created");
         endorsement.versionIsssue();
 
+    }
+
+    @Then("select add endorsement button")
+    public void selectAddEndorsementButton() throws InterruptedException {
+        Log.info("select add endorsement button");
+        endorsement.addEndorsement();
+    }
+
+    @And("select the endorsement desired {string}")
+    public void selectTheEndorsementDesired(String endorsementNameA) throws IOException, InterruptedException {
+        Log.info("select the endorsement desired");
+        p= PropertyHelper.loadData();
+        String selectAddEndorsement= p.getProperty(endorsementNameA);
+        endorsement.selectEndorsement(selectAddEndorsement);
+    }
+
+    @And("enter the data desired {string} {string}")
+    public void enterTheDataDesired(String endorsementNameA, String endorsementNameValues) throws IOException, InterruptedException {
+        Log.info("enter the data desired");
+        p= PropertyHelper.loadData();
+        String selectAddEndorsement= p.getProperty(endorsementNameA);
+        String value= p.getProperty(endorsementNameValues);
+        endorsement.selectEndorsementValues(selectAddEndorsement,value);
+    }
+
+    @When("click in Add button")
+    public void clickInAddButton() throws InterruptedException {
+        Log.info("click in the Add button");
+        endorsement.addEndorsementButton();
+    }
+
+    @And("select Lock for edit")
+    public void selectLockForEdit() throws InterruptedException {
+        Log.info("select Lock for Edit");
+        endorsement.selectLockButton();
     }
 }
