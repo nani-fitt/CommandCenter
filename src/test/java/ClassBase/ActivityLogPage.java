@@ -1,7 +1,9 @@
 package ClassBase;
 
+import io.cucumber.java.hu.De;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class ActivityLogPage {
 
@@ -21,6 +24,9 @@ public class ActivityLogPage {
 
     @FindBy(xpath = "//span[contains(text(),'Activity')]")
     List<WebElement> activityName;
+
+    @FindBy(xpath = "//span[contains(text(),'Documents')]")
+    List<WebElement> docName;
 
     @FindBy(css = "i[class='fas fa-plus-square']")
     List<WebElement> addActivity;
@@ -36,6 +42,21 @@ public class ActivityLogPage {
 
     @FindBy(xpath = "//span[contains(text(),'On')]")
     List<WebElement> activityCreation;
+
+    @FindBy(id = "documentTypeSelected")
+    WebElement typeDoc;
+
+    @FindBy(id = "visibilityTypeSelected")
+    WebElement visibilityType;
+
+    @FindBy(id = "fileDocument")
+    WebElement fileDoc;
+
+    @FindBy(xpath = "//*[contains(text(),'Upload')]")
+    WebElement uploadButton;
+
+    @FindBy(xpath = "//*[contains(text(),'DeclarationTestAuto.pdf')]")
+    List<WebElement> checkDoc;
 
     public ActivityLogPage(WebDriver driver)
     {
@@ -83,8 +104,8 @@ public class ActivityLogPage {
 
     }
 
-    public void verifyCreation()
-    {
+    public void verifyCreation() throws InterruptedException {
+        Thread.sleep(3000);
         System.out.println("verify result activity"+ activityCreation.get(0).getText());
         String [] text= activityCreation.get(0).getText().split(" ");
         System.out.println("verify result activity convert"+ text[1]);
@@ -93,5 +114,56 @@ public class ActivityLogPage {
         String [] compare= dateFormat.format(date4).split(" ");
         System.out.println("verify real value"+ compare[0]);
         Assert.assertEquals(text[1],compare[0]);
+    }
+
+    public void activityDoc() throws InterruptedException {
+        Thread.sleep(3000);
+        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(50));
+        wait.until(ExpectedConditions.visibilityOfAllElements(docName.get(1)));
+    }
+
+    public void clickAddDoc() throws InterruptedException {
+        Thread.sleep(3000);
+        if(addActivity.get(1).isDisplayed()) {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+            wait.until(ExpectedConditions.elementToBeClickable(addActivity.get(1))).click();
+        }
+    }
+
+    public void selectDocType(String type) throws InterruptedException {
+        Thread.sleep(3000);
+        DetailsPolicyPage page = new DetailsPolicyPage(driver);
+        Actions act= new Actions(driver);
+        act.moveToElement(typeDoc).click(typeDoc).build().perform();
+       Optional<WebElement> element= page.editSelect.stream()
+               .filter(webElement -> webElement.getText().equals(type)).findFirst();
+      element.ifPresent(webElement -> act.moveToElement(webElement).click().build().perform());
+    }
+
+    public void selectDocTypeVisible(String type) throws InterruptedException {
+        Thread.sleep(3000);
+        DetailsPolicyPage page = new DetailsPolicyPage(driver);
+        Actions act= new Actions(driver);
+        act.moveToElement(visibilityType).click(visibilityType).build().perform();
+        Optional<WebElement> element= page.editSelect.stream()
+                .filter(webElement -> webElement.getText().equals(type)).findFirst();
+        element.ifPresent(webElement -> act.moveToElement(webElement).click().build().perform());
+    }
+
+    public void selectDoc() throws InterruptedException {
+        Thread.sleep(3000);
+        Actions act= new Actions(driver);
+        fileDoc.sendKeys("/Users/esneyddisguerrerodurand/Downloads/DeclarationTestAuto.pdf");
+        Thread.sleep(4000);
+        act.moveToElement(uploadButton).click(uploadButton).build().perform();
+
+    }
+
+    public void checkDoc() throws InterruptedException {
+        Thread.sleep(9000);
+        driver.manage().window().fullscreen();
+        Assert.assertTrue(checkDoc.get(0).isDisplayed());
+        Thread.sleep(2000);
+        Assert.assertTrue(checkDoc.get(1).isDisplayed());
     }
 }

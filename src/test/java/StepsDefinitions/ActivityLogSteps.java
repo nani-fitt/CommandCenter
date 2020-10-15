@@ -47,8 +47,45 @@ public class ActivityLogSteps extends TestBase {
     }
 
     @Then("verify the activity was created")
-    public void verifyTheActivityWasCreated() {
+    public void verifyTheActivityWasCreated() throws InterruptedException {
         Log.info("verify activity log creation");
         activity.verifyCreation();
+    }
+
+    @And("verify documents is displayed")
+    public void verifyDocumentsIsDisplayed() throws InterruptedException {
+        Log.info("verify documents is displayed");
+        activity.activityDoc();
+
+    }
+
+    @When("click on add documents button")
+    public void clickOnAddDocumentsButton() throws InterruptedException {
+        Log.info("click on add documents icon");
+        activity.clickAddDoc();
+    }
+
+    @And("enter the values desired {string} {string}")
+    public void enterTheValuesDesired(String Type, String VisibilityType) throws InterruptedException, IOException {
+        Log.info("enter the values desired");
+        p= PropertyHelper.loadData();
+        String log= p.getProperty(Type);
+        String visibility= p.getProperty(VisibilityType);
+        activity.selectDocType(log);
+        activity.selectDocTypeVisible(visibility);
+
+    }
+
+    @Then("click on file option and select the documents desired")
+    public void clickOnFileOptionAndSelectTheDocumentsDesired() throws InterruptedException {
+        Log.info("upload file desired");
+        activity.selectDoc();
+    }
+
+    @Then("verify documents is displayed on the list")
+    public void verifyDocumentsIsDisplayedOnTheList() throws InterruptedException {
+        Log.info("verify the documents are displayed");
+        activity.checkDoc();
+
     }
 }
