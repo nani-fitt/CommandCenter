@@ -72,3 +72,7 @@ d
 4src/test/java/StepsDefinitions/ActivityLogSteps.java,1/d/1d3dad8f9c461c170a2fb00919a0a8871a5288f1
 \
 ,src/test/java/ClassBase/ActivityLogPage.java,e/e/ee605afeae5174f95eb0e8dd1f1059275cda67f8
+h
+8src/test/resources/features/EndorsementCoverages.feature,5/5/5594de35f791d77ba315d7ce54d7756649d58d09
+V
+&src/properties/testDataDemo.properties,6/d/6db9251b038fb0c1f50aa7631196015f5f4a0d23

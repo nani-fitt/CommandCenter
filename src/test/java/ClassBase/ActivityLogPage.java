@@ -101,6 +101,7 @@ public class ActivityLogPage {
         Thread.sleep(3000);
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
             wait.until(ExpectedConditions.elementToBeClickable(saveActivityButton)).click();
+            Thread.sleep(3000);
 
     }
 

@@ -3,7 +3,7 @@
 Feature: Verify activity log functionality
 
 
-  @ActivityLog
+  @ActivityLogCreated
   Scenario Outline: Verify Activity Log is displayed
     Given user Sign In with correct credentials "<username>" and "<password>"
     When  select the Queue desired "<nameQueue>"

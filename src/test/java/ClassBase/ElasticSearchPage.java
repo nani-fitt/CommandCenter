@@ -1,5 +1,6 @@
 package ClassBase;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -20,8 +21,6 @@ public class ElasticSearchPage {
     @FindBy(id= "inspection")
     WebElement selectInspection;
 
-    @FindBy(xpath= "//span[contains(text(),'f8a460708d49')]")
-    WebElement inspectionNumber;
 
     @FindBy(css= "div[class='alert alert-light text-center']")
     WebElement errorMessage;
@@ -68,7 +67,10 @@ public class ElasticSearchPage {
 
     public void verifyResultInspection(String inspection) throws InterruptedException {
         Thread.sleep(5000);
-        Assert.assertTrue(inspectionNumber.isDisplayed());
+        String firstPart= "//span[contains(text(),'";
+        String secondPart="')]";
+        String inspectionLocator= firstPart + inspection + secondPart;
+        Assert.assertTrue(driver.findElement(By.xpath(inspectionLocator)).isDisplayed());
     }
 
     public void errorMessage(String message) throws InterruptedException {
