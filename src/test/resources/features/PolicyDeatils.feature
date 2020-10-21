@@ -2,7 +2,6 @@
 @PolicyDetails
   Feature: Verify policy details are displayed
 
-    Background:
 
 
     @ViewPolicyDetails
@@ -55,8 +54,8 @@
       Then  verify the issue is created
 
       Examples:
-        | username | password |nameQueue  |index        |editButtonOption|firstName  |email|maritalStatus|address|status  |
-        | email    | password |queu       |policyIndexSe|editSelection   |name       |mail |status       |addres |Approved|
+        | username | password |nameQueue  |index      |editButtonOption|firstName  |email|maritalStatus|address|status  |
+        | email    | password |queu       |policyIndex|editSelection   |name       |mail |status       |addres |Approved|
 
     @EditInsuranceInfoIncorrectDateBirth
     Scenario Outline: Edit primary insurance with incorrect date of birth
@@ -94,8 +93,8 @@
       Then  verify the issue is created
 
       Examples:
-        | username | password |nameQueue |index         |editButtonOption|firstName|lastName|phoneNumber|dateBirth |city|postal|state|county|email    |maritalStatus   |address    |status             |
-        | email    | password |queu      |policyIndexSe |editSelection   |nameInsu |lastName|phone      |dateBirth |city|postal|state|county|emailInsu|maritalStatus   |addressInsu|statusNewInsurance |
+        | username | password |nameQueue |index      |editButtonOption|firstName|lastName|phoneNumber|dateBirth |city|postal|state|county|email    |maritalStatus   |address    |status             |
+        | email    | password |queu      |policyIndex|editSelection   |nameInsu |lastName|phone      |dateBirth |city|postal|state|county|emailInsu|maritalStatus   |addressInsu|statusNewInsurance |
 
     @AddAdditionalInterest
     Scenario Outline: Add additional Interest
@@ -116,8 +115,8 @@
       Then  verify the issue is created
 
       Examples:
-        | username | password |status   |nameQueue |index          |firstName |lastName  |loanNumber|institutionName|address  |city  |postal  |editButtonOption|
-        | email    | password |Approved |queu      |policyIndexSe1 |nameInsu  |lastNameIn|loanNumber|institution    |addresInt|cityIn|postalIn|editSelectionA  |
+        | username | password |status   |nameQueue |index      |firstName |lastName  |loanNumber|institutionName|address  |city  |postal  |editButtonOption|
+        | email    | password |Approved |queu      |policyIndex|nameInsu  |lastNameIn|loanNumber|institution    |addresInt|cityIn|postalIn|editSelectionA  |
 
    # @EditAdditionalInterest
    # Scenario Outline: Edit additional Interest

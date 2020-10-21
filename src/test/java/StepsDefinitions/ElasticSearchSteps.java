@@ -57,6 +57,7 @@ public class ElasticSearchSteps extends TestBase {
         p= PropertyHelper.loadData();
         String claims= p.getProperty(criteria);
         search.verifyResultClaims(claims);
+        validateWindows();
 
     }
 
@@ -66,6 +67,7 @@ public class ElasticSearchSteps extends TestBase {
         p= PropertyHelper.loadData();
         String inspection= p.getProperty(criteria);
         search.verifyResultInspection(inspection);
+        validateWindows();
 
     }
 

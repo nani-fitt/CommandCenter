@@ -8,11 +8,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -23,8 +28,9 @@ public class TestBase {
     public static WebDriver driver;
     public static Eyes eyes;
 
-    public void selectBrowser(String browser, String env) throws IOException {
+    public void selectBrowser(String browser, String env, String hub) throws IOException {
 
+        if (hub.equals("Not")) {
             if (browser.equalsIgnoreCase("Chrome")) {
 
                 WebDriverManager.chromedriver().version("85.0.4183.83").setup();
@@ -37,8 +43,7 @@ public class TestBase {
                 driver = new ChromeDriver(options);
                 iniciateEyes();
 
-            }
-             else if (browser.equalsIgnoreCase("Firefox")) {
+            } else if (browser.equalsIgnoreCase("Firefox")) {
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions geoDisabled = new FirefoxOptions();
                 geoDisabled.addPreference("geo.enabled", true);
@@ -47,18 +52,29 @@ public class TestBase {
                 geoDisabled.addPreference("geo.prompt.testing.allow", true);
                 driver = new FirefoxDriver(geoDisabled);
                 iniciateEyes();
-            }
-            else if (browser.equalsIgnoreCase("Safari")) {
+            } else if (browser.equalsIgnoreCase("Safari")) {
 
-                SafariOptions options=new SafariOptions();
+                SafariOptions options = new SafariOptions();
                 options.setUseTechnologyPreview(true);
                 driver = new SafariDriver(options);
                 iniciateEyes();
             }
-		driver.manage().window().maximize();
-		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().pageLoadTimeout(500, TimeUnit.SECONDS);
-		driver.navigate().to(env);
+              }
+            else if (hub.equals("Yes") && browser.equals("Firefox")) {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setBrowserName(BrowserType.FIREFOX);
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+                }
+                else if (hub.equals("Yes") && browser.equals("Chrome")){
+                DesiredCapabilities capabilities= new DesiredCapabilities();
+                capabilities.setBrowserName(BrowserType.CHROME);
+                driver= new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),capabilities);
+            }
+            driver.manage().window().maximize();
+            driver.manage().deleteAllCookies();
+            driver.manage().timeouts().pageLoadTimeout(500, TimeUnit.SECONDS);
+            driver.navigate().to(env);
+
     }
 
     private static void iniciateEyes() throws IOException {
@@ -88,6 +104,7 @@ public class TestBase {
         eyes.checkElement(locator);
         eyes.close();
     }
+    
 
 
 

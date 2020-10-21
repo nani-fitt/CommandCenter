@@ -182,7 +182,7 @@ public class DetailsPolicyPage {
     public void coverageSection() throws InterruptedException {
         Thread.sleep(5000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-        wait.until(ExpectedConditions.textToBePresentInElement(coverageOption, "COVERAGE"));
+        wait.until(ExpectedConditions.textToBePresentInElement(coverageOption, "COVERAGES"));
     }
 
     public void expandableListDetails() throws InterruptedException {
@@ -201,6 +201,8 @@ public class DetailsPolicyPage {
 
     public void insuranceInformation() throws InterruptedException {
         Thread.sleep(5000);
+        JavascriptExecutor js= (JavascriptExecutor)driver;
+        js.executeScript("window.scrollBy(0,600)");
         Assert.assertTrue(insuranceInfo.get(0).isDisplayed());
     }
 
@@ -228,6 +230,8 @@ public class DetailsPolicyPage {
 
     public void addInsuranceInfo() throws InterruptedException {
         Thread.sleep(5000);
+        JavascriptExecutor js= (JavascriptExecutor)driver;
+        js.executeScript("window.scrollBy(0,600)");
         Actions act = new Actions(driver);
         act.moveToElement(buttonAddI.get(0)).click(buttonAddI.get(0)).build().perform();
     }

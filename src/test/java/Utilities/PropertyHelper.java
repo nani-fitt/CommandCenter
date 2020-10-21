@@ -10,9 +10,10 @@ public class PropertyHelper {
 			FileInputStream file = new FileInputStream("./src/properties/browser.properties");
 			Properties p = new Properties();
 			p.load(file);
-			String env= p.getProperty("Environment");
+			String env= p.getProperty("environment");
+			String BaseURLEnv= System.getProperty("environment");
 			try {
-				if (env.equalsIgnoreCase("dev")) {
+				if (env.equalsIgnoreCase("dev") ) {
 					FileInputStream f = new FileInputStream("./src/properties/testDataDev.properties");
 					p.load(f);
 				}

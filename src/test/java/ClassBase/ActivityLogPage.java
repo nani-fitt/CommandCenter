@@ -1,6 +1,6 @@
 package ClassBase;
 
-import io.cucumber.java.hu.De;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -47,7 +47,7 @@ public class ActivityLogPage {
     WebElement typeDoc;
 
     @FindBy(id = "visibilityTypeSelected")
-    WebElement visibilityType;
+    List<WebElement> visibilityType;
 
     @FindBy(id = "fileDocument")
     WebElement fileDoc;
@@ -144,27 +144,29 @@ public class ActivityLogPage {
     public void selectDocTypeVisible(String type) throws InterruptedException {
         Thread.sleep(3000);
         DetailsPolicyPage page = new DetailsPolicyPage(driver);
-        Actions act= new Actions(driver);
-        act.moveToElement(visibilityType).click(visibilityType).build().perform();
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", visibilityType.get(0));
         Optional<WebElement> element= page.editSelect.stream()
                 .filter(webElement -> webElement.getText().equals(type)).findFirst();
-        element.ifPresent(webElement -> act.moveToElement(webElement).click().build().perform());
+        element.ifPresent(webElement -> webElement.click());
     }
 
     public void selectDoc() throws InterruptedException {
         Thread.sleep(3000);
         Actions act= new Actions(driver);
-        fileDoc.sendKeys("/Users/esneyddisguerrerodurand/Downloads/DeclarationTestAuto.pdf");
+        fileDoc.sendKeys("/Users/esneyddisguerrerodurand/Desktop/Receipt-2.pdf");
         Thread.sleep(4000);
         act.moveToElement(uploadButton).click(uploadButton).build().perform();
+        Thread.sleep(5000);
 
     }
 
     public void checkDoc() throws InterruptedException {
-        Thread.sleep(9000);
-        driver.manage().window().fullscreen();
+        Thread.sleep(5000);
+       // driver.navigate().refresh();
         Assert.assertTrue(checkDoc.get(0).isDisplayed());
         Thread.sleep(2000);
         Assert.assertTrue(checkDoc.get(1).isDisplayed());
+
     }
 }

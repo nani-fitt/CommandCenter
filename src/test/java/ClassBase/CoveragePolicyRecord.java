@@ -80,48 +80,48 @@ public class CoveragePolicyRecord {
         Actions act= new Actions(driver);
         switch (valueSelect) {
             case "Dwelling":
-                act.moveToElement(page.propertyMenu.get(2)).build().perform();
-                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(2))).click();
-                Thread.sleep(3000);
-                wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(4))).click();
-                break;
-            case "Other Structure": {
                 act.moveToElement(page.propertyMenu.get(3)).build().perform();
                 wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(3))).click();
                 Thread.sleep(3000);
-                act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(5)).build().perform();
+                wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(5))).click();
+                break;
+            case "Other Structure": {
+                act.moveToElement(page.propertyMenu.get(4)).build().perform();
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(4))).click();
+                Thread.sleep(3000);
+                wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(6))).click();
 
                 break;
             }
             case "Personal Property": {
-                act.moveToElement(page.propertyMenu.get(4)).build().perform();
-                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(4))).click();
+                act.moveToElement(page.propertyMenu.get(5)).build().perform();
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(5))).click();
                 Thread.sleep(3000);
-                act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(6)).build().perform();
+                wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(7))).click();
 
                 break;
             }
             case "Additional Living": {
-                act.moveToElement(page.propertyMenu.get(5)).build().perform();
-                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(5))).click();
+                act.moveToElement(page.propertyMenu.get(6)).build().perform();
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(6))).click();
                 Thread.sleep(3000);
-                act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(7)).build().perform();
+                wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(8))).click();
 
                 break;
             }
             case "Personal liability": {
-                act.moveToElement(page.propertyMenu.get(6)).build().perform();
-                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(6))).click();
+                act.moveToElement(page.propertyMenu.get(7)).build().perform();
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(7))).click();
                 Thread.sleep(3000);
-                act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(8)).build().perform();
+                wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(9))).click();
 
                 break;
             }
             case "Medical Payment": {
-                act.moveToElement(page.propertyMenu.get(7)).build().perform();
-                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(7))).click();
+                act.moveToElement(page.propertyMenu.get(8)).build().perform();
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(8))).click();
                 Thread.sleep(3000);
-                act.moveToElement(page.editSelect.get(3)).doubleClick(page.editSelect.get(9)).build().perform();
+                wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(10))).click();
 
                 break;
             }

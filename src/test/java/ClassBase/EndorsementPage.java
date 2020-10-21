@@ -199,10 +199,10 @@ public class EndorsementPage {
             case "Additional Residence Rented To Others":
             case "Animal Liability":
             case "Business Pursuits":
-            case "Fraud Protection": {
-                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(8))).click();
+            case "Inflation Guard": {
+                wait.until(ExpectedConditions.elementToBeClickable(page.propertyMenu.get(page.propertyMenu.size()-1))).click();
                 Thread.sleep(3000);
-                wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(11))).click();
+                wait.until(ExpectedConditions.elementToBeClickable(page.editSelect.get(page.editSelect.size()-1))).click();
 
                 break;
             }
