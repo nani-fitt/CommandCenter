@@ -109,7 +109,10 @@ public class DetailsPolicy extends TestBase {
         String randomEmail=p.getProperty(email)+randomInt+"@mailinator.com";
         String maritalStat= p.getProperty(maritalStatus);
         String sddres= p.getProperty(address);
-        deta.editInformation(firstNa,randomEmail,maritalStat,sddres);
+        deta.editInterestFirstName(firstNa);
+        deta.editInformationEmail(randomEmail);
+        deta.enterMarital(maritalStat);
+        deta.editInformationAddress(sddres);
 
     }
 
@@ -196,8 +199,13 @@ public class DetailsPolicy extends TestBase {
         String randomEmail=p.getProperty(email);
         String maritalStat= p.getProperty(maritalStatus);
         String sddres= p.getProperty(address);
-
-        deta.enterInsuranceData(firstNa,last,numberP,birth,cit,codePostal,stateS,coun,randomEmail,maritalStat,sddres);
+        deta.enterFirstName(firstNa);
+        deta.enterLastName(last);
+        deta.enterBirthday(birth);
+        deta.enterEmail(randomEmail);
+        deta.enterMarital(maritalStat);
+        deta.enterPhoneNumber(numberP);
+        deta.enterOtherValues(sddres,cit,codePostal);
 
     }
 
@@ -206,7 +214,7 @@ public class DetailsPolicy extends TestBase {
         Log.info("Incorrect email");
         p= PropertyHelper.loadData();
         String mailIn= p.getProperty(email);
-        deta.enterEmailOnly(mailIn);
+        deta.editEmailOnly(mailIn);
 
     }
 
@@ -248,7 +256,11 @@ public class DetailsPolicy extends TestBase {
         String addres= p.getProperty(address);
         String cityIn= p.getProperty(city);
         String codePostal= p.getProperty(postal);
-        deta.addAdditionalInterest(firstNa,last,loanN,instName,addres,cityIn,codePostal);
+        deta.enterFirstName(firstNa);
+        deta.enterLastName(last);
+        deta.editInterestLoanNumber(loanN);
+        deta.editInterestInstitutionName(instName);
+        deta.enterOtherValues(cityIn,addres,codePostal);
     }
 
     @Then("edit the date of birth {string}")
@@ -256,7 +268,7 @@ public class DetailsPolicy extends TestBase {
         Log.info("Edit date of birth");
         p= PropertyHelper.loadData();
         String incorrectDate= p.getProperty(dateBirth);
-        deta.enterBirthayOnly(incorrectDate);
+        deta.editBirthayOnly(incorrectDate);
 
     }
     @Then("edit the additional information desired {string}{string}{string}")
@@ -266,8 +278,9 @@ public class DetailsPolicy extends TestBase {
         String lastNa= p.getProperty(lastName);
         String loanN= p.getProperty(loanNumber);
         String instName= p.getProperty(institutionName);
-        deta.editInterest(lastNa,loanN,instName);
-
+        deta.editInterestLastName(lastNa);
+        deta.editInterestLoanNumber(loanN);
+        deta.editInterestInstitutionName(instName);
     }
 
     @And("click on save button interest")
@@ -286,5 +299,33 @@ public class DetailsPolicy extends TestBase {
     public void clickOnSaveAddInsuranceButton() throws InterruptedException {
         Log.info("Click on add insurance information button");
         deta.addInsuranceInfoSave();
+    }
+
+    @And("select Add Representative button")
+    public void selectAddRepresentativeButton() throws InterruptedException {
+        Log.info("Select add representative button");
+        deta.addRepresentativeInformation();
+    }
+
+    @And("click on save representative information button")
+    public void clickOnSaveRepresentativeInformationButton() throws InterruptedException {
+        Log.info("click on save representative information");
+        deta.buttonSaveInformation();
+    }
+
+    @Then("enter the representative information desired {string}{string}{string}{string}{string}")
+    public void enterTheRepresentativeInformationDesired(String nameInsu, String lastName, String phone, String emailR, String relationwithinsurance) throws IOException, InterruptedException {
+        Log.info("enter the representative information data");
+        p= PropertyHelper.loadData();
+        String name= p.getProperty(nameInsu);
+        String last= p.getProperty(lastName);
+        String phoneNum= p.getProperty(phone);
+        String email= p.getProperty(emailR);
+        String insurance= p.getProperty(relationwithinsurance);
+        deta.enterFirstName(name);
+        deta.enterLastName(last);
+        deta.enterPhoneNumber(phoneNum);
+        deta.enterEmail(email);
+        deta.enterInsuranceRelation(insurance);
     }
 }

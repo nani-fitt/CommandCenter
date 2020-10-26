@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -77,6 +78,9 @@ public class DetailsPolicyPage {
     @FindBy(id = "saveInsuredButton")
     WebElement buttonSave;
 
+    @FindBy(id = "addRepresentativeButton")
+    WebElement addRepresentativeButton;
+
     @FindBy(id = "addInsuredButton")
     List<WebElement>  buttonAddI;
 
@@ -116,6 +120,9 @@ public class DetailsPolicyPage {
     @FindBy(xpath = "//*[contains(text(),'Add additional interest')]")
     WebElement addAdditionalInterest;
 
+    @FindBy(xpath = "//*[contains(text(),'Add Representative')]")
+    WebElement addRepresentativeInfo;
+
     @FindBy(id = "loanNumber")
     WebElement loanNumber;
 
@@ -133,6 +140,10 @@ public class DetailsPolicyPage {
 
     @FindBy(id = "policyNumber")
     WebElement policyNu;
+
+    @FindBy(id = "relationship")
+    WebElement relationInsurance;
+
 
 
     public DetailsPolicyPage(WebDriver driver) {
@@ -175,7 +186,7 @@ public class DetailsPolicyPage {
     }
 
     public void detailsSection() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(6000);
         Assert.assertTrue(policyNu.isDisplayed());
     }
 
@@ -234,6 +245,23 @@ public class DetailsPolicyPage {
         js.executeScript("window.scrollBy(0,600)");
         Actions act = new Actions(driver);
         act.moveToElement(buttonAddI.get(0)).click(buttonAddI.get(0)).build().perform();
+        test();
+    }
+
+    public void test()
+    {
+        int a[] = {5,3,2,7,10,1};
+        System.out.println(a.length);
+        for (int x = 0; x < a.length; x++) {
+            for (int i = 0; i < a.length-x-1; i++) {
+                if(a[i] < a[i+1]){
+                    int tmp = a[i+1];
+                    a[i+1] = a[i];
+                    a[i] = tmp;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(a));
     }
 
     public void addInsuranceInfoSave() throws InterruptedException {
@@ -263,6 +291,13 @@ public class DetailsPolicyPage {
         Thread.sleep(5000);
     }
 
+    public void buttonSaveInformation() throws InterruptedException {
+        Thread.sleep(5000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
+        wait.until(ExpectedConditions.elementToBeClickable(addRepresentativeButton)).click();
+        Thread.sleep(5000);
+    }
+
     public void buttonCancelInterest() throws InterruptedException {
         Thread.sleep(5000);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
@@ -279,19 +314,9 @@ public class DetailsPolicyPage {
         Assert.assertTrue(addressOne.isDisplayed());
     }
 
-    public void editInformation(String name, String mail, String status, String addres) throws InterruptedException {
+    public void editInformationEmail( String mail) throws InterruptedException {
         Thread.sleep(5000);
-        firstName.click();
-        String valueName = firstName.getAttribute("value");
         Actions act = new Actions(driver);
-        while (valueName.length() >= 1) {
-            act.doubleClick(firstName).build().perform();
-            firstName.sendKeys(Keys.DELETE);
-            valueName = firstName.getAttribute("value");
-        }
-        firstName.sendKeys(name);
-        Thread.sleep(3000);
-
         email.click();
         String valueEmail = email.getAttribute("value");
         while (valueEmail.length() >= 1) {
@@ -302,10 +327,10 @@ public class DetailsPolicyPage {
         email.sendKeys(mail);
         Thread.sleep(3000);
 
-        dropdownOptions.get(2).click();
-        selectMaritalStatus(status);
-
-        Thread.sleep(3000);
+    }
+    public void editInformationAddress( String addres) throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act = new Actions(driver);
         addressOne.click();
         String value = addressOne.getAttribute("value");
         while (value.length() >= 1) {
@@ -380,49 +405,7 @@ public class DetailsPolicyPage {
         Assert.assertEquals(newChangePolicy.get(0).getText(), status);
     }
 
-    public void enterInsuranceData(String name, String lastnam, String phoneN, String dateB, String city, String postal, String state, String county,
-                                   String emai, String marital, String addres) throws InterruptedException {
-        Thread.sleep(5000);
-        Actions act = new Actions(driver);
-        act.click(firstName).build().perform();
-        firstName.sendKeys(name);
-        Thread.sleep(2000);
-
-        act.click(lastName).build().perform();
-        lastName.sendKeys(lastnam);
-        Thread.sleep(2000);
-
-        act.click(phoneNumber).build().perform();
-        phoneNumber.sendKeys(phoneN);
-        Thread.sleep(2000);
-
-        act.click(birthday).build().perform();
-        birthday.sendKeys(dateB);
-        Thread.sleep(2000);
-
-        act.click(email).build().perform();
-        email.sendKeys(emai);
-        Thread.sleep(2000);
-
-        dropdownOptions.get(2).click();
-        selectMaritalStatus(marital);
-        Thread.sleep(2000);
-
-        addressOne.sendKeys(addres);
-        Thread.sleep(2000);
-
-        cityEnter.sendKeys(city);
-        Thread.sleep(2000);
-
-        postalCode.sendKeys(postal);
-        Thread.sleep(2000);
-
-        dropdownOptions.get(3).click();
-        selectMaritalStatus(state);
-
-    }
-
-    public void enterEmailOnly(String mail) throws InterruptedException {
+    public void editEmailOnly(String mail) throws InterruptedException {
         Thread.sleep(5000);
         email.click();
         Actions act = new Actions(driver);
@@ -469,6 +452,12 @@ public class DetailsPolicyPage {
         act.moveToElement(addAdditionalInterest).doubleClick(addAdditionalInterest).build().perform();
     }
 
+    public void addRepresentativeInformation() throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act = new Actions(driver);
+        act.moveToElement(addRepresentativeInfo).doubleClick(addRepresentativeInfo).build().perform();
+    }
+
     public void verifyAddAdditionalInterestScreen() throws InterruptedException {
         Thread.sleep(5000);
         Assert.assertTrue(firstName.isDisplayed());
@@ -479,16 +468,9 @@ public class DetailsPolicyPage {
         Assert.assertTrue(addressOne.isDisplayed());
     }
 
-    public void addAdditionalInterest(String name, String lastnam, String loanN, String instname, String addres, String city, String postal) throws InterruptedException {
+    public void addAdditionalInterest(String loanN, String instname, String addres, String city, String postal) throws InterruptedException {
         Thread.sleep(7000);
         Actions act = new Actions(driver);
-        act.click(firstName).build().perform();
-        firstName.sendKeys(name);
-        Thread.sleep(2000);
-
-        act.click(lastName).build().perform();
-        lastName.sendKeys(lastnam);
-        Thread.sleep(2000);
 
         act.click(loanNumber).build().perform();
         loanNumber.sendKeys(loanN);
@@ -510,7 +492,7 @@ public class DetailsPolicyPage {
 
     }
 
-    public void enterBirthayOnly(String dateBirth) throws InterruptedException {
+    public void editBirthayOnly(String dateBirth) throws InterruptedException {
         Thread.sleep(5000);
         birthday.click();
         Actions act = new Actions(driver);
@@ -542,7 +524,7 @@ public class DetailsPolicyPage {
         }
     }
 
-    public void editInterest(String lastNam, String loanNumb, String instName) throws InterruptedException {
+    public void editInterestLastName(String lastNam) throws InterruptedException {
         Thread.sleep(5000);
         lastName.click();
         String valueName = lastName.getAttribute("value");
@@ -555,6 +537,26 @@ public class DetailsPolicyPage {
         lastName.sendKeys(lastNam);
         Thread.sleep(3000);
 
+    }
+
+    public void editInterestFirstName(String name) throws InterruptedException {
+        Thread.sleep(5000);
+        firstName.click();
+        String valueName = firstName.getAttribute("value");
+        Actions act = new Actions(driver);
+        while (valueName.length() >= 1) {
+            act.doubleClick(firstName).build().perform();
+            firstName.sendKeys(Keys.DELETE);
+            valueName = firstName.getAttribute("value");
+        }
+        firstName.sendKeys(name);
+        Thread.sleep(3000);
+
+    }
+
+    public void editInterestLoanNumber(String loanNumb) throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act = new Actions(driver);
         loanNumber.click();
         String valueEmail = loanNumber.getAttribute("value");
         while (valueEmail.length() >= 1) {
@@ -564,7 +566,11 @@ public class DetailsPolicyPage {
         }
         loanNumber.sendKeys(loanNumb);
         Thread.sleep(3000);
+    }
 
+    public void editInterestInstitutionName(String instName) throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act = new Actions(driver);
         instituionName.click();
         String inst = instituionName.getAttribute("value");
         while (inst.length() >= 1) {
@@ -575,6 +581,80 @@ public class DetailsPolicyPage {
         instituionName.sendKeys(instName);
         Thread.sleep(3000);
     }
+
+    public void enterFirstName(String name) throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act = new Actions(driver);
+        act.click(firstName).build().perform();
+        firstName.sendKeys(name);
+        Thread.sleep(2000);
+    }
+
+    public void enterLastName(String lastnam) throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act = new Actions(driver);
+        act.click(lastName).build().perform();
+        lastName.sendKeys(lastnam);
+        Thread.sleep(2000);
+    }
+
+    public void enterPhoneNumber(String phoneN) throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act = new Actions(driver);
+        act.click(phoneNumber).build().perform();
+        phoneNumber.sendKeys(phoneN);
+        Thread.sleep(2000);
+
+    }
+
+    public void enterBirthday(String dateB) throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act = new Actions(driver);
+        act.click(birthday).build().perform();
+        birthday.sendKeys(dateB);
+        Thread.sleep(2000);
+
+    }
+
+    public void enterEmail(String emai) throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act = new Actions(driver);
+        act.click(email).build().perform();
+        email.sendKeys(emai);
+        Thread.sleep(2000);
+
+    }
+
+    public void enterInsuranceRelation(String insurance) throws InterruptedException {
+        Thread.sleep(5000);
+        Actions act = new Actions(driver);
+        act.click(relationInsurance).build().perform();
+        relationInsurance.sendKeys(insurance);
+        Thread.sleep(2000);
+
+    }
+
+    public void enterMarital(String marital) throws InterruptedException {
+        Thread.sleep(5000);
+        dropdownOptions.get(2).click();
+        selectMaritalStatus(marital);
+        Thread.sleep(2000);
+
+    }
+
+    public void enterOtherValues(String addres,String city, String postal) throws InterruptedException {
+        Thread.sleep(5000);
+        addressOne.sendKeys(addres);
+        Thread.sleep(2000);
+
+        cityEnter.sendKeys(city);
+        Thread.sleep(2000);
+
+        postalCode.sendKeys(postal);
+        Thread.sleep(2000);
+
+    }
+
 
 
 }

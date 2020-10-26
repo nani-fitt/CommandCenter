@@ -104,7 +104,7 @@ public class TestBase {
         eyes.checkElement(locator);
         eyes.close();
     }
-    
+
 
 
 
