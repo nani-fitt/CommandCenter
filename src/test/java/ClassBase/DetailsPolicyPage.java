@@ -146,6 +146,8 @@ public class DetailsPolicyPage {
 
 
 
+
+
     public DetailsPolicyPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -654,6 +656,8 @@ public class DetailsPolicyPage {
         Thread.sleep(2000);
 
     }
+
+
 
 
 

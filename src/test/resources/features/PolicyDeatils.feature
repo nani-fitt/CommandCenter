@@ -118,6 +118,7 @@
         | username | password |status   |nameQueue |index      |firstName |lastName  |loanNumber|institutionName|address  |city  |postal  |editButtonOption|
         | email    | password |Approved |queu      |policyIndex|nameInsu  |lastNameIn|loanNumber|institution    |addresInt|cityIn|postalIn|editSelectionA  |
 
+    @AddRepresentativeInformation
     Scenario Outline: Add representative information
      Given user Sign In with correct credentials "<username>" and "<password>"
      When  select the Queue desired "<nameQueue>"

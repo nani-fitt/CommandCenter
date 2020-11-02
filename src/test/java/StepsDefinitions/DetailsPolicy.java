@@ -2,6 +2,7 @@ package StepsDefinitions;
 
 
 import ClassBase.DetailsPolicyPage;
+import ClassBase.ReportClaimsPage;
 import Utilities.Log;
 import Utilities.PropertyHelper;
 import Utilities.TestBase;
@@ -17,6 +18,7 @@ import java.util.Random;
 public class DetailsPolicy extends TestBase {
 
     DetailsPolicyPage deta= new DetailsPolicyPage(driver);
+    ReportClaimsPage page= new ReportClaimsPage(driver);
     Properties p;
 
     @Given("user Sign In with correct credentials {string} and {string}")
@@ -322,6 +324,7 @@ public class DetailsPolicy extends TestBase {
         String phoneNum= p.getProperty(phone);
         String email= p.getProperty(emailR);
         String insurance= p.getProperty(relationwithinsurance);
+        page.goContactInformation();
         deta.enterFirstName(name);
         deta.enterLastName(last);
         deta.enterPhoneNumber(phoneNum);
