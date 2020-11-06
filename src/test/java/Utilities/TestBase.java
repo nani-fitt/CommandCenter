@@ -16,7 +16,6 @@ import org.openqa.selenium.safari.SafariOptions;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +33,6 @@ public class TestBase {
             if (browser.equalsIgnoreCase("Chrome")) {
 
                 WebDriverManager.chromedriver().version("85.0.4183.83").setup();
-                //System.setProperty("webdriver.chrome.driver", "./src/test/resources/Drivers/chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 Map<String, Object> prefs = new HashMap<>();
                 // options.addArguments("headless");

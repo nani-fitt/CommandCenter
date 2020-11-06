@@ -86,3 +86,9 @@ a
 1src/test/java/StepsDefinitions/DwellingSteps.java,0/3/03df14de8bae34262dad27ba0480e8ffd1881be8
 c
 3src/test/java/StepsDefinitions/RatingInfoSteps.java,1/d/1d9659194fc9c9d42e93f007c4f19afaf4e13a31
+a
+1src/test/resources/features/PolicyDeatils.feature,6/9/69adf3151cf06b5e3ee39f84563c56c9f58b6b01
+]
+-src/test/java/ClassBase/ReportClaimsPage.java,3/9/391374b3ace2ca50b0cb05b52f7bf78e306c0864
+e
+5src/test/java/StepsDefinitions/ReportClaimsSteps.java,c/d/cd060bbe34df7740a6d9dbc3ea844acbab59f5bb

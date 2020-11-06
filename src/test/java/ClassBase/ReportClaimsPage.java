@@ -81,6 +81,12 @@ public class ReportClaimsPage {
     @FindBy (id="homePhone")
     WebElement phone;
 
+    @FindBy(css = "a[class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary']")
+    List<WebElement> autoFill;
+
+    @FindBy(css = "span[class='MuiSwitch-track']")
+    WebElement selectFields;
+
 
     public ReportClaimsPage (WebDriver driver)
     {
@@ -267,6 +273,34 @@ public class ReportClaimsPage {
         act.click(phone).build().perform();
         phone.sendKeys(phoneN);
         Thread.sleep(2000);
+    }
+
+    public void autoFillReportBy() throws InterruptedException {
+        Thread.sleep(3000);
+        Actions act= new Actions(driver);
+        act.moveToElement(autoFill.get(3)).click().build().perform();
+        Thread.sleep(2000);
+        Assert.assertFalse(nameFir.get(0).getText().isEmpty());
+        Assert.assertFalse(nameLast.get(0).getText().isEmpty());
+    }
+
+    public void autoFillContact() throws InterruptedException {
+        Thread.sleep(3000);
+        scroll(autoFill.get(4));
+        Actions act= new Actions(driver);
+        act.moveToElement(autoFill.get(4)).click().build().perform();
+        Thread.sleep(2000);
+        Assert.assertFalse(nameFir.get(1).getText().isEmpty());
+        Assert.assertFalse(nameLast.get(1).getText().isEmpty());
+    }
+
+    public void completeFields() throws InterruptedException {
+        Thread.sleep(3000);
+        scroll(selectFields);
+        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(50));
+        wait.until(ExpectedConditions.elementToBeClickable(selectFields)).click();
+        Assert.assertFalse(lossAddres.getText().isEmpty());
+
     }
 
 

@@ -77,7 +77,7 @@ public class ReportClaimsSteps extends TestBase {
     public void selectLiability(String liability) throws IOException, InterruptedException {
         Log.info("select liability");
         p=PropertyHelper.loadData();
-        int liab= 25;
+        int liab= 22;
         claims.checkbookSelection(liab);
     }
 
@@ -85,7 +85,7 @@ public class ReportClaimsSteps extends TestBase {
     public void selectCauseOfLoss(String causeLoss) throws IOException, InterruptedException {
         Log.info("select liability");
         p=PropertyHelper.loadData();
-        int cause= 30;
+        int cause= 23;
         claims.checkbookSelection(cause);
 
     }
@@ -131,4 +131,35 @@ public class ReportClaimsSteps extends TestBase {
         claims.enterHomePhone(phone);
 
     }
-}
+
+    @When("select autofill data option")
+    public void selectAutofillDataOption() throws InterruptedException {
+        Log.info("select autofill'");
+        claims.autoFillReportBy();
+
+    }
+
+    @When("select autofill contact data option")
+    public void selectAutofillContactOption() throws InterruptedException {
+        Log.info("select autofill'");
+        claims.autoFillContact();
+    }
+
+    @And("select complete data option")
+    public void selectCompleteDataOption() throws InterruptedException {
+        Log.info("select complete data option");
+        claims.completeFields();
+    }
+
+    @And("enter the data for Loss Information section {string}{string}{string}")
+    public void enterTheDataForLossInformationSection(String timeLoss, String situation, String damage) {
+        Log.info("enter the data Loss Information");
+    }
+
+    @Then("enter the contact information desired {string}")
+    public void enterTheContactInformationDesired(String relationwithinsurance) {
+        Log.info("enter the contact information");
+    }
+
+
+    }
