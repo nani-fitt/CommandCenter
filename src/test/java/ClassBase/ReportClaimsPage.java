@@ -1,12 +1,14 @@
 package ClassBase;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.locators.RelativeLocator;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -39,10 +41,13 @@ public class ReportClaimsPage {
     @FindBy (id="canContineLiving")
     WebElement continueLiving;
 
-    @FindBy (id="bestTimeToCall")
+    @FindBy (id="bestTimeToCallFrom")
     WebElement timeCall;
 
-    @FindBy (id="timeZone")
+    @FindBy (id="bestTimeToCallTo")
+    WebElement timeCallTo;
+
+    @FindBy (css="#timeZone")
     WebElement timeZoneS;
 
     @FindBy (id="saveStickyBarButton")
@@ -81,10 +86,10 @@ public class ReportClaimsPage {
     @FindBy (id="homePhone")
     WebElement phone;
 
-    @FindBy(css = "a[class='MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary']")
+    @FindBy(xpath = "//a[contains(text(),'Auto-fill with primary insured')]")
     List<WebElement> autoFill;
 
-    @FindBy(css = "span[class='MuiSwitch-track']")
+    @FindBy(css = "span[class='MuiSwitch-thumb']")
     WebElement selectFields;
 
 
@@ -104,6 +109,18 @@ public class ReportClaimsPage {
     {
         JavascriptExecutor js= (JavascriptExecutor)driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public void scrollHalf()
+    {
+        JavascriptExecutor js= (JavascriptExecutor)driver;
+        js.executeScript("window.scroll(0,500);");
+    }
+
+    public void scrollUp()
+    {
+        JavascriptExecutor js= (JavascriptExecutor)driver;
+        js.executeScript("window.scroll(500,0);");
     }
 
     public void claimsSection()
@@ -160,45 +177,46 @@ public class ReportClaimsPage {
         scroll(timeCall);
         timeCall.sendKeys(best);
         Thread.sleep(2000);
+        timeCallTo.sendKeys(best);
     }
 
     public void selectState(String state) throws InterruptedException {
         Thread.sleep(3000);
         scroll(dateLoss);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-        wait.until(ExpectedConditions.elementToBeClickable(stateSelection)).click();
+        Actions act= new Actions(driver);
+        act.moveToElement(cityLoss).click(cityLoss).build().perform();
         DetailsPolicyPage page = new DetailsPolicyPage(driver);
         if(page.editSelect.size() >1)
         {
             Optional<WebElement> correct = page.editSelect.stream().filter((element) -> element.getText().equals(state))
                     .findFirst();
-            correct.ifPresent(webElement -> wait.until(ExpectedConditions.elementToBeClickable(webElement)).click());
+            correct.ifPresent(webElement ->  act.moveToElement(webElement).click().build().perform());
         }
     }
 
     public void selectCata(String cata) throws InterruptedException {
         Thread.sleep(3000);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-        wait.until(ExpectedConditions.elementToBeClickable(catastropheS)).click();
+        Actions act= new Actions(driver);
+        act.moveToElement(catastropheS).click(catastropheS).build().perform();
         DetailsPolicyPage page = new DetailsPolicyPage(driver);
         if(page.editSelect.size() >1)
         {
             Optional<WebElement> correct = page.editSelect.stream().filter((element) -> element.getText().equals(cata))
                     .findFirst();
-            correct.ifPresent(webElement -> wait.until(ExpectedConditions.elementToBeClickable(webElement)).click());
+            correct.ifPresent(webElement -> act.moveToElement(webElement).click().build().perform());
         }
     }
 
     public void selectSituation(String situ) throws InterruptedException {
         Thread.sleep(3000);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-        wait.until(ExpectedConditions.elementToBeClickable(continueLiving)).click();
+        Actions act= new Actions(driver);
+        act.moveToElement(continueLiving).click(continueLiving).build().perform();
         DetailsPolicyPage page = new DetailsPolicyPage(driver);
         if(page.editSelect.size() >1)
         {
             Optional<WebElement> correct = page.editSelect.stream().filter((element) -> element.getText().equals(situ))
                     .findFirst();
-            correct.ifPresent(webElement -> wait.until(ExpectedConditions.elementToBeClickable(webElement)).click());
+            correct.ifPresent(webElement ->  act.moveToElement(webElement).click().build().perform());
         }
     }
 
@@ -211,14 +229,14 @@ public class ReportClaimsPage {
 
     public void selectTimeZone(String time) throws InterruptedException {
         Thread.sleep(3000);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(80));
-        wait.until(ExpectedConditions.elementToBeClickable(timeZoneS)).click();
+        Actions act= new Actions(driver);
+        act.moveToElement(timeZoneS).click(timeZoneS).build().perform();
         DetailsPolicyPage page = new DetailsPolicyPage(driver);
         if(page.editSelect.size() >1)
         {
             Optional<WebElement> correct = page.editSelect.stream().filter((element) -> element.getText().equals(time))
                     .findFirst();
-            correct.ifPresent(webElement -> wait.until(ExpectedConditions.elementToBeClickable(webElement)).click());
+            correct.ifPresent(webElement -> act.moveToElement(webElement).click().build().perform());
         }
     }
 
@@ -278,28 +296,26 @@ public class ReportClaimsPage {
     public void autoFillReportBy() throws InterruptedException {
         Thread.sleep(3000);
         Actions act= new Actions(driver);
-        act.moveToElement(autoFill.get(3)).click().build().perform();
-        Thread.sleep(2000);
-        Assert.assertFalse(nameFir.get(0).getText().isEmpty());
-        Assert.assertFalse(nameLast.get(0).getText().isEmpty());
+        act.moveToElement(autoFill.get(0)).click().build().perform();
+        Thread.sleep(4000);
+
     }
 
     public void autoFillContact() throws InterruptedException {
-        Thread.sleep(3000);
-        scroll(autoFill.get(4));
-        Actions act= new Actions(driver);
-        act.moveToElement(autoFill.get(4)).click().build().perform();
-        Thread.sleep(2000);
-        Assert.assertFalse(nameFir.get(1).getText().isEmpty());
-        Assert.assertFalse(nameLast.get(1).getText().isEmpty());
+        Thread.sleep(5000);
+        String script="document.getElementsByClassName('MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary')[3].click();";
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript(script);
+        Thread.sleep(4000);
+
     }
 
     public void completeFields() throws InterruptedException {
         Thread.sleep(3000);
-        scroll(selectFields);
-        WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(50));
-        wait.until(ExpectedConditions.elementToBeClickable(selectFields)).click();
-        Assert.assertFalse(lossAddres.getText().isEmpty());
+        scrollHalf();
+        Actions act= new Actions(driver);
+        act.clickAndHold(selectFields).click().build().perform();
+        Thread.sleep(2000);
 
     }
 

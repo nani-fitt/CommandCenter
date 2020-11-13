@@ -65,5 +65,5 @@ Feature: Report Claim section feature
     Then  click on submit button
 
     Examples:
-      | username | password |nameQueue|index        |timeLoss|situation |damage |propertyDame |liability |causeLoss |firstNameC  |lastNameC      |phoneNumber   |email       |relationwithinsurance|
-      | email    | password |queu     |policyIndexSe|timeC   |situationC| dameC |propDameC    |liabilityC|causeC    | nameContact|lastNameContact| numberContact|emailContact| relationContact     |
+      | username | password |nameQueue|index        |timeLoss|situation |damage |propertyDame |liability |causeLoss |relationwithinsurance|
+      | email    | password |queu     |policyIndexSe|timeC   |situationC| dameC |propDameC    |liabilityC|causeC    | relationContact     |

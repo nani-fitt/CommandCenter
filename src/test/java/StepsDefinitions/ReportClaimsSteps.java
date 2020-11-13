@@ -152,13 +152,23 @@ public class ReportClaimsSteps extends TestBase {
     }
 
     @And("enter the data for Loss Information section {string}{string}{string}")
-    public void enterTheDataForLossInformationSection(String timeLoss, String situation, String damage) {
+    public void enterTheDataForLossInformationSection(String timeLoss, String situation, String damage) throws IOException, InterruptedException {
         Log.info("enter the data Loss Information");
+        p= PropertyHelper.loadData();
+        String text= p.getProperty(timeLoss);
+        String sit= p.getProperty(situation);
+        String dama= p.getProperty(damage);
+        claims.enterTimeLoss(text);
+        claims.selectCata(sit);
+        claims.selectSituation(dama);
     }
 
     @Then("enter the contact information desired {string}")
-    public void enterTheContactInformationDesired(String relationwithinsurance) {
+    public void enterTheContactInformationDesired(String relationwithinsurance) throws IOException, InterruptedException {
         Log.info("enter the contact information");
+        p= PropertyHelper.loadData();
+        String text= p.getProperty(relationwithinsurance);
+        claims.enterInsurance(text);
     }
 
 

@@ -38,16 +38,8 @@ Y
 )src/main/java/resources/log4j2.properties,2/b/2bacaf43fbebcafb9cde3e051617052bb88d3b02
 F
 Logs/commandCenter.log,b/8/b80bcba98a34f661e77c39d7bb8279055e73651a
-X
-(target/site/cucumber-pretty/formatter.js,f/c/fc2ff40635d98342edffde465593be0928b93497
-V
-&target/site/cucumber-pretty/index.html,1/a/1aca8e71a2f73d46a57e7f9d7f9c4c9631fa25a2
-_
-/target/site/cucumber-pretty/jquery-3.4.1.min.js,8/b/8b797a6535a9196d4edf1dfff4f706a85ee88afd
 U
 %target/site/cucumber-pretty/report.js,2/9/29e3d22fdbf83547945505de141b439423328a8f
-U
-%target/site/cucumber-pretty/style.css,f/d/fd5c7f74bdc7c81a0229f220604b7ed7ef2e8075
 b
 2target/test-classes/features/ElasticSearch.feature,2/2/2248043a955d5d5181b278dab5115b4c9228da00
 b
